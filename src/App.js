@@ -1,24 +1,41 @@
-import logo from './logo.svg';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+// import React from "react";
+// import logo from './logo.svg';
 import './App.css';
+import Login from './Login';
+import Logout from './Logout';
+import Navbar from './Navbar';
+import Sites from './Sites';
+import Circuits from './Circuits';
+import AddCircuit from './AddCircuit';
+import AddSite from './AddSite';
+
+import { AuthProvider, RequireAuth } from './Auth';
+// import { IP } from './config.js';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AuthProvider>
+      <BrowserRouter>
+        <div className="App">
+          <Navbar />
+          <div className='content flex justify-center'>
+            <Routes>
+              <Route element={<RequireAuth />}>
+                <Route path='/sites' element={<Sites />} />
+                <Route path='/addsite' element={<AddSite />} />
+                <Route path='/circuits' element={<Circuits />} />
+                <Route path='/addcircuit' element={<AddCircuit />} />
+              </Route>
+              
+              <Route path='/' element={<Login />} />
+              <Route path='/logout' element={<Logout />} />
+            </Routes>
+          </div> 
+        </div>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
 
