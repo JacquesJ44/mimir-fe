@@ -14,6 +14,8 @@ const Sites = () => {
     // const [post, setPost] = useState('');
     // const [province, setProvince] = useState('');
 
+    const [data, setData] = useState([])
+
     const handleSubmit = (e) => {
         e.preventDefault()
         const form = {
@@ -39,23 +41,22 @@ const Sites = () => {
             console.log(data)
             if ('error' in data) {
                 alert(data['error'])
-            } 
-            // else if ('msg' in data) {
-            //     alert(data['msg']);
-                // navigate('/sites')
-            // }
+            } else {
+                setData(data);
+            }
         })
     }
 
     return ( 
-        // <div className="h-screen flex items-center justify-center border">
-        // <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-200">
+<>
+        {/* // <div className="h-screen flex items-center justify-center border">
+        // <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-200"> */}
         
         <div className="border card-body">
         <div className="border flex justify-end max-w">
             <Link to='/addsite' className="btn btn-accent">Add Site</Link>
         </div>
-
+        
         <form onSubmit={handleSubmit}>
             <div className="border flex items-justify mt-5">
             <div className="form-control mx-1">
@@ -193,9 +194,57 @@ const Sites = () => {
             </div>
             </div>
         </form>
+        {/* </div> */}
+
+        <div className="border flex font-sans">
+            <table className="flex-auto table-auto border border-collapse my-10">
+                {/* <thead>
+                    <tr>
+                    <th className="border border-slate-600">ID</th>
+                    <th className="border border-slate-600">Type A</th>
+                    <th className="border border-slate-600">Type B</th>
+                    <th className="border border-slate-600">Deliver again from</th>
+                    <th className="border border-slate-600">Start from</th>
+                    <th className="border border-slate-600">Name</th>
+                    <th className="border border-slate-600">Surname</th>
+                    <th className="border border-slate-600">Email</th>
+                    <th className="border border-slate-600">Send notification</th>
+                    <th className="border border-slate-600">Forward Parcels</th>
+                    <th className="border border-slate-600">Infopost</th>
+                    <th className="border border-slate-600">Additional Contacts</th>
+                    <th className="border border-slate-600">From Address</th>
+                    <th className="border border-slate-600">To Address</th>
+                    <th className="border border-slate-600">Date Created</th>
+                    <th className="border border-slate-600">Paid</th>
+                    <th className="border border-slate-600">Term (Months)</th>
+                    <th className="border border-slate-600">Status</th>
+                    </tr>
+                </thead> */}
+                <tbody>
+                    {data && data.map((site) => (
+                        <tr key={site[0]}>
+                            <td className="border border-slate-700">{site[0]}</td> 
+                            <td className="border border-slate-700">{site[1]}</td> 
+                            <td className="border border-slate-700">{site[2]}</td> 
+                            <td className="border border-slate-700">{site[4]}</td> 
+                            <td className="border border-slate-700">{site[5]}</td> 
+                            <td className="border border-slate-700">{site[6]}</td> 
+                            <td className="border border-slate-700">{site[7]}</td> 
+                            <td className="border border-slate-700">{site[8]}</td> 
+                            <td className="border border-slate-700">{site[9]}</td> 
+                            <td className="border border-slate-700">{site[10]}</td>
+                            <td>
+                                <button className="btn btn-accent w-full max-w-xs">View</button> 
+                            </td>    
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
         </div>
-        // </div>
-        // </div>
+        </div>
+        {/* // </div> */}
+        {/* // </div> */}
+</>
      );
 }
  
