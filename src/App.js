@@ -10,6 +10,7 @@ import Sites from './Sites';
 import Circuits from './Circuits';
 import AddCircuit from './AddCircuit';
 import AddSite from './AddSite';
+import ViewSite from './ViewSite';
 
 import { AuthProvider, RequireAuth } from './Auth';
 // import { IP } from './config.js';
@@ -25,6 +26,7 @@ function App() {
               <Route element={<RequireAuth />}>
                 <Route path='/sites' element={<Sites />} />
                 <Route path='/addsite' element={<AddSite />} />
+                <Route path='/viewsite/:site' element={<ViewSite />} />
                 <Route path='/circuits' element={<Circuits />} />
                 <Route path='/addcircuit' element={<AddCircuit />} />
               </Route>

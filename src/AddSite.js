@@ -6,7 +6,7 @@ const AddSite = () => {
 
     let navigate = useNavigate()
 
-    const [customer, setCustomer] = useState('');
+    const [site, setSite] = useState('');
     const [latitude, setLatitude] = useState('');
     const [longitude, setLongitude] = useState('');
     const [building, setBuilding] = useState('');
@@ -20,7 +20,7 @@ const AddSite = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         const form = {
-            customer: customer,
+            site: site,
             latitude: latitude,
             longitude: longitude,
             building: building,
@@ -63,14 +63,14 @@ const AddSite = () => {
                 <div className="border flex">
                     <div className="form-control flex-auto">
                         <label className="label">
-                            <span className="label-text">Customer</span>    
+                            <span className="label-text">Site</span>    
                         </label>
                         <input className="input input-bordered w-full max-w-xs"
                             type="text" 
-                            placeholder="Customer"  
+                            placeholder="Site Name"  
                             required
-                            value = { customer }
-                            onChange={(e) => setCustomer(e.target.value)}
+                            value = { site }
+                            onChange={(e) => setSite(e.target.value)}
                             />
                     </div>
                 

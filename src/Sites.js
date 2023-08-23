@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { IP } from './config.js';
 
 const Sites = () => {
-    const [customer, setCustomer] = useState('');
+    const [site, setSite] = useState('');
     const [latitude, setLatitude] = useState('');
     const [longitude, setLongitude] = useState('');
     // const [building, setBuilding] = useState('');
@@ -19,7 +19,7 @@ const Sites = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         const form = {
-            customer: customer,
+            site: site,
             latitude: latitude,
             longitude: longitude,
             street: street,
@@ -61,14 +61,14 @@ const Sites = () => {
             <div className="border flex items-justify mt-5">
             <div className="form-control mx-1">
                 <label className="label">
-                    <span className="label-text">Customer</span>    
+                    <span className="label-text">Site</span>    
                 </label>
                 <input className="input input-bordered w-full max-w-xs"
                     type="text" 
-                    placeholder="Customer"
+                    placeholder="Site name"
                     // required
-                    value = { customer }
-                    onChange={(e) => setCustomer(e.target.value)} 
+                    value = { site }
+                    onChange={(e) => setSite(e.target.value)} 
                 />
             </div>
 
@@ -226,15 +226,16 @@ const Sites = () => {
                             <td className="border border-slate-700">{site[0]}</td> 
                             <td className="border border-slate-700">{site[1]}</td> 
                             <td className="border border-slate-700">{site[2]}</td> 
+                            <td className="border border-slate-700">{site[3]}</td> 
                             <td className="border border-slate-700">{site[4]}</td> 
                             <td className="border border-slate-700">{site[5]}</td> 
                             <td className="border border-slate-700">{site[6]}</td> 
                             <td className="border border-slate-700">{site[7]}</td> 
                             <td className="border border-slate-700">{site[8]}</td> 
-                            <td className="border border-slate-700">{site[9]}</td> 
-                            <td className="border border-slate-700">{site[10]}</td>
+                            <td className="border border-slate-700">{site[9]}</td>
                             <td>
-                                <button className="btn btn-accent w-full max-w-xs">View</button> 
+                                <Link to='/viewsite/<site>' className="btn btn-accent">View</Link>
+                                {/* <button className="btn btn-accent w-full max-w-xs">View</button>  */}
                             </td>    
                         </tr>
                     ))}
