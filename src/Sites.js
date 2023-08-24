@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from 'react-router-dom';
 import { IP } from './config.js';
+import ViewSite from "./ViewSite.js";
 
 const Sites = () => {
     const [site, setSite] = useState('');
@@ -234,7 +235,7 @@ const Sites = () => {
                             <td className="border border-slate-700">{site[8]}</td> 
                             <td className="border border-slate-700">{site[9]}</td>
                             <td>
-                                <Link to='/viewsite/<site>' className="btn btn-accent">View</Link>
+                                <Link to='/viewsite/:site' data={site.site} className="btn btn-accent">View</Link>
                                 {/* <button className="btn btn-accent w-full max-w-xs">View</button>  */}
                             </td>    
                         </tr>

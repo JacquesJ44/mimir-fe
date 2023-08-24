@@ -1,12 +1,12 @@
 import { useState,useEffect } from "react";
 import { Link, useParams } from 'react-router-dom';
 import { IP } from './config.js';
-import { useNavigate } from "react-router-dom";
+import Sites from "./Sites.js";
 
 const ViewSite = () => {
 
     const [data, setData] = useState([])
-    const { site } = useParams()
+    const site  = useParams()
 
     useEffect(() => {
         window.scrollTo(0,0)
@@ -36,16 +36,17 @@ const ViewSite = () => {
 
               <div className="md:grid md:grid-cols-3 md:gap-6 py-3">
                 <div className="md:col-span-1 text-left">
-                  <h3 className="text-lg font-medium leading-6 text-gray-900">{data['site']}</h3>
+                  {/* <h3 className="text-lg font-medium leading-6 text-gray-900">{data['msg']}</h3> */}
                 </div>
                 <div className="mt-5 md:mt-0 md:col-span-2 text-left">
-                  { data['latitude'] } { data['longitude'] } { data['msg'] }<br/>
-                  { data["oldPLZ"] }, { data["oldOrt"] }<br/>
+                  { data[0] } 
+                  {/* { data['latitude'] } { data['longitude'] }<br/>
+                  { data['site'] }, { data[6] }<br/> */}
                   Deutschland
                 </div>
               </div>
 
-              <div className="md:grid md:grid-cols-3 md:gap-6 py-3">
+              {/* <div className="md:grid md:grid-cols-3 md:gap-6 py-3">
                 <div className="md:col-span-1 text-left">
                   <h3 className="text-lg font-medium leading-6 text-gray-900">Neue Adresse</h3>
                 </div>
@@ -68,7 +69,7 @@ const ViewSite = () => {
                   <i>Paketsendungen</i>: { data["paketsendungen"] ? "Pakete werden umgeleitet." : "Pakete werden nicht umgeleitet." }<br/>
                   <i>Infopost</i>: { data["infopost"] ? "Infopost wird umgeleitet." : "Infopost wird nicht umgeleitet." }<br/>
                 </div>
-              </div>
+              </div> */}
 
               {/* <div className="md:grid md:grid-cols-3 md:gap-6 py-3">
                 <div className="md:col-span-1 text-left">
