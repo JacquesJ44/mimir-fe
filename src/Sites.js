@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { IP } from './config.js';
 import ViewSite from "./ViewSite.js";
 
@@ -16,6 +16,8 @@ const Sites = () => {
     // const [province, setProvince] = useState('');
 
     const [data, setData] = useState([])
+
+    const { sitename } = useParams()
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -223,19 +225,19 @@ const Sites = () => {
                 </thead> */}
                 <tbody>
                     {data && data.map((site) => (
-                        <tr key={site[0]}>
-                            <td className="border border-slate-700">{site[0]}</td> 
-                            <td className="border border-slate-700">{site[1]}</td> 
-                            <td className="border border-slate-700">{site[2]}</td> 
-                            <td className="border border-slate-700">{site[3]}</td> 
-                            <td className="border border-slate-700">{site[4]}</td> 
-                            <td className="border border-slate-700">{site[5]}</td> 
-                            <td className="border border-slate-700">{site[6]}</td> 
-                            <td className="border border-slate-700">{site[7]}</td> 
-                            <td className="border border-slate-700">{site[8]}</td> 
-                            <td className="border border-slate-700">{site[9]}</td>
+                        <tr key={site.site}>
+                            <td className="border border-slate-700">{site.site}</td> 
+                            <td className="border border-slate-700">{site.latitude}</td> 
+                            <td className="border border-slate-700">{site.longitude}</td> 
+                            <td className="border border-slate-700">{site.building}</td> 
+                            <td className="border border-slate-700">{site.street}</td> 
+                            <td className="border border-slate-700">{site.number}</td> 
+                            <td className="border border-slate-700">{site.suburb}</td> 
+                            <td className="border border-slate-700">{site.city}</td> 
+                            <td className="border border-slate-700">{site.postcode}</td> 
+                            <td className="border border-slate-700">{site.province}</td>
                             <td>
-                                <Link to='/viewsite/:site' data={site.site} className="btn btn-accent">View</Link>
+                                <Link to={'/viewsite/' + sitename} className="btn btn-accent">View</Link>
                                 {/* <button className="btn btn-accent w-full max-w-xs">View</button>  */}
                             </td>    
                         </tr>

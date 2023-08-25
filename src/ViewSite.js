@@ -1,12 +1,11 @@
 import { useState,useEffect } from "react";
 import { Link, useParams } from 'react-router-dom';
 import { IP } from './config.js';
-import Sites from "./Sites.js";
 
 const ViewSite = () => {
 
     const [data, setData] = useState([])
-    const site  = useParams()
+    const {site}  = useParams()
 
     useEffect(() => {
         window.scrollTo(0,0)
@@ -36,13 +35,13 @@ const ViewSite = () => {
 
               <div className="md:grid md:grid-cols-3 md:gap-6 py-3">
                 <div className="md:col-span-1 text-left">
-                  {/* <h3 className="text-lg font-medium leading-6 text-gray-900">{data['msg']}</h3> */}
+                  <h3 className="text-lg font-medium leading-6 text-gray-900">{data.building}</h3>
                 </div>
                 <div className="mt-5 md:mt-0 md:col-span-2 text-left">
-                  { data[0] } 
-                  {/* { data['latitude'] } { data['longitude'] }<br/>
-                  { data['site'] }, { data[6] }<br/> */}
-                  Deutschland
+                  { data['site'] } {data['latitude']} {data.longitude}
+                  { data['latitude'] } { data['longitude'] }<br/>
+                  { data['site'] }, { data[6] }<br/>
+                  Deutschland dd {data.site}
                 </div>
               </div>
 
