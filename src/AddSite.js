@@ -135,7 +135,7 @@ const AddSite = () => {
                         <input className="input input-bordered w-full max-w-xs"
                             type="text" 
                             placeholder="Number"
-                            required
+                            // required
                             value = { number }
                             onChange={(e) => setNumber(e.target.value)} 
                         />

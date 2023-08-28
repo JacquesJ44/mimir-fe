@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { IP } from './config.js';
-import ViewSite from "./ViewSite.js";
 
 const Sites = () => {
     const [site, setSite] = useState('');
@@ -13,11 +12,9 @@ const Sites = () => {
     const [suburb, setSuburb] = useState('');
     const [city, setCity] = useState('');
     // const [post, setPost] = useState('');
-    // const [province, setProvince] = useState('');
+    const [province, setProvince] = useState('');
 
     const [data, setData] = useState([])
-
-    const { sitename } = useParams()
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -27,7 +24,8 @@ const Sites = () => {
             longitude: longitude,
             street: street,
             suburb: suburb,
-            city: city
+            city: city,
+            province: province,
         };
         fetch(IP + '/sites', {
             method: 'POST',
@@ -179,7 +177,7 @@ const Sites = () => {
                 />
             </div> */}
 
-            {/* <div className="form-control mx-1">
+            <div className="form-control mx-1">
                 <label className="label">
                     <span className="label-text">Province</span>    
                 </label>
@@ -190,7 +188,7 @@ const Sites = () => {
                     value = { province }
                     onChange={(e) => setProvince(e.target.value)} 
                 />
-            </div> */}
+            </div>
 
             <div className="form-control mt-9 ml-1">
                 <button className="btn btn-accent w-full max-w-xs">Search</button>
@@ -237,7 +235,7 @@ const Sites = () => {
                             <td className="border border-slate-700">{site.postcode}</td> 
                             <td className="border border-slate-700">{site.province}</td>
                             <td>
-                                <Link to={'/viewsite/' + sitename} className="btn btn-accent">View</Link>
+                                <Link to={'/viewsite/' + site.site} className="btn btn-accent">View</Link>
                                 {/* <button className="btn btn-accent w-full max-w-xs">View</button>  */}
                             </td>    
                         </tr>
