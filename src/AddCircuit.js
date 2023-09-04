@@ -45,6 +45,12 @@ const AddCircuit = () => {
         {id: 3, label: "60 Months", value: "60 Months"},
     ]
 
+    const ennis = [
+        {id: 0, label: "ENI21-0000123", value: "ENI21-0000123"},
+        {id: 1, label: "ENI11-0001059", value: "ENI11-0001059"},
+        {id: 2, label: "GNI21-0000071", value: "GNI21-0000071"},
+    ]
+
     
 
 
@@ -118,17 +124,19 @@ const AddCircuit = () => {
 
                 {/* Row 2 */}
                 <div className="border flex">
-                    <div className="form-control flex-auto">
-                        <label className="label">
-                            <span className="label-text">ENNI</span>    
+                <div className="form-control flex-auto">
+                        <label htmlFor="enni" className="label">
+                            <span className="label-text">ENNI</span>
                         </label>
-                        <input className="input input-bordered w-full max-w-xs"
-                            type="text" 
-                            placeholder="ENNI"
-                            required
-                            value = { enni }
-                            onChange={(e) => setEnni(e.target.value)} 
-                        />
+                        {/* <div>  */}
+                            <select onChange={(e) => setEnni(e.target.value)} id="enni" className="input input-bordered w-full max-w-xs">
+                                    {ennis.map(vendormap => {
+                                        return (
+                                            <option key={vendormap.id} value={vendormap.value}>{vendormap.label}</option>
+                                        )
+                                    })}
+                            </select>
+                        {/* </div> */}
                     </div>
 
                     <div className="form-control flex-auto">
@@ -225,6 +233,7 @@ const AddCircuit = () => {
             <p>{circuitType}</p>
             <p>{speed}</p>
             <p>{contractTerm}</p>
+            <p>{enni}</p>
         </div>
         // </div>
         // </div>
