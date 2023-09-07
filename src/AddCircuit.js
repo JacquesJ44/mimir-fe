@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { IP } from './config.js';
+
 
 const AddCircuit = () => {
     
@@ -16,44 +18,77 @@ const AddCircuit = () => {
     const [vlan, setVlan] = useState('');
     const [enni, setEnni] = useState('');
 
+    const [options, setOptions] = useState([]);
+    const [selectedOption, setSelectedOption] = useState('');
+    useEffect(() => {
+        fetch(IP + '/getsite', {
+            method: 'GET',
+            headers: { "Authorization": 'Basic',
+                "Content-Type": 'application/json',
+                "Access-Control-Allow-Origin": 'true'},
+            // body: JSON.stringify(form),
+            mode: "cors",
+            credentials: "include"
+        }).then(res => {
+            console.log(res)
+            return res.json()
+        }).then(data => {
+            console.log(data)
+            if ('error' in data) {
+                alert(data['error'])
+            } else {
+                setOptions(data);
+            }
+        })
+    })
+    // const addDays = (days) => {
+    //     const newDate = startDate;
+    //     newDate.setDate(startDate + days);
+    //     setLastDay(newDate);
+    //     console.log(lastDay)
+    // }
+
+    
+
     const vendors = [
-        {id: 0, label: "DFA", value: "DFA"},
-        {id: 1, label: "Seacom", value: "Seacom"},
-        {id: 2, label: "Comsol", value: "Comsol"},
-        {id: 3, label: "Frogfoot", value: "Frogfoot"},
+        {label: "Vendor", value: 'null'},
+        {label: "DFA", value: "DFA"},
+        {label: "Seacom", value: "Seacom"},
+        {label: "Comsol", value: "Comsol"},
+        {label: "Frogfoot", value: "Frogfoot"},
 
     ]
 
     const circuitTypes = [
-        {id: 0, label: "Magellan", value: "Magellan"},
-        {id: 1, label: "Calypte", value: "Calypte"},
-        {id: 2, label: "GPON", value: "GPON"},
-        {id: 3, label: "CX Broadband", value: "CX Broadband"},
+        {label: "Circuit Type", value: 'null'},
+        {label: "Magellan", value: "Magellan"},
+        {label: "Calypte", value: "Calypte"},
+        {label: "GPON", value: "GPON"},
+        {label: "CX Broadband", value: "CX Broadband"},
     ]
     
     const speeds = [
-        {id: 0, label: "10Mbps", value: "10Mbps"},
-        {id: 1, label: "20Mbps", value: "20Mbps"},
-        {id: 2, label: "50Mbps", value: "50Mbps"},
-        {id: 3, label: "100Mbps", value: "100Mbps"},
+        {label: "Speed", value: 'null'},
+        {label: "10Mbps", value: "10Mbps"},
+        {label: "20Mbps", value: "20Mbps"},
+        {label: "50Mbps", value: "50Mbps"},
+        {label: "100Mbps", value: "100Mbps"},
     ]
 
     const contractTerms = [
-        {id: 0, label: "12 Months", value: "12 Months"},
-        {id: 1, label: "24 Months", value: "24 Months"},
-        {id: 2, label: "36 Months", value: "36 Months"},
-        {id: 3, label: "60 Months", value: "60 Months"},
+        {label: "Term", value: 'null'},
+        {label: "12 Months", value: "12 Months"},
+        {label: "24 Months", value: "24 Months"},
+        {label: "36 Months", value: "36 Months"},
+        {label: "60 Months", value: "60 Months"},
     ]
 
     const ennis = [
-        {id: 0, label: "ENI21-0000123", value: "ENI21-0000123"},
-        {id: 1, label: "ENI11-0001059", value: "ENI11-0001059"},
-        {id: 2, label: "GNI21-0000071", value: "GNI21-0000071"},
+        {label: "ENNI", value: 'null'},
+        {label: "ENI21-0000123", value: "ENI21-0000123"},
+        {label: "ENI11-0001059", value: "ENI11-0001059"},
+        {label: "GNI21-0000071", value: "GNI21-0000071"},
     ]
-
-    
-
-
 
     return ( 
         // <div className="h-screen flex items-center justify-center border">
@@ -69,9 +104,9 @@ const AddCircuit = () => {
                         </label>
                         {/* <div>  */}
                             <select onChange={(e) => setVendor(e.target.value)} id="vendor" className="input input-bordered w-full max-w-xs">
-                                    {vendors.map(vendormap => {
+                                    {vendors.map((vendormap, index) => {
                                         return (
-                                            <option key={vendormap.id} value={vendormap.value}>{vendormap.label}</option>
+                                            <option key={index} value={vendormap.value}>{vendormap.label}</option>
                                         )
                                     })}
                             </select>
@@ -84,9 +119,9 @@ const AddCircuit = () => {
                         </label>
                         {/* <div>  */}
                             <select onChange={(e) => setCircuitType(e.target.value)} id="circuittype" className="input input-bordered w-full max-w-xs">
-                                    {circuitTypes.map(vendormap => {
+                                    {circuitTypes.map((vendormap, index) => {
                                         return (
-                                            <option key={vendormap.id} value={vendormap.value}>{vendormap.label}</option>
+                                            <option key={index} value={vendormap.value}>{vendormap.label}</option>
                                         )
                                     })}
                             </select>
@@ -99,9 +134,9 @@ const AddCircuit = () => {
                         </label>
                         {/* <div>  */}
                             <select onChange={(e) => setSpeed(e.target.value)} id="speed" className="input input-bordered w-full max-w-xs">
-                                    {speeds.map(vendormap => {
+                                    {speeds.map((vendormap, index) => {
                                         return (
-                                            <option key={vendormap.id} value={vendormap.value}>{vendormap.label}</option>
+                                            <option key={index} value={vendormap.value}>{vendormap.label}</option>
                                         )
                                     })}
                             </select>
@@ -124,15 +159,15 @@ const AddCircuit = () => {
 
                 {/* Row 2 */}
                 <div className="border flex">
-                <div className="form-control flex-auto">
+                    <div className="form-control flex-auto">
                         <label htmlFor="enni" className="label">
                             <span className="label-text">ENNI</span>
                         </label>
                         {/* <div>  */}
                             <select onChange={(e) => setEnni(e.target.value)} id="enni" className="input input-bordered w-full max-w-xs">
-                                    {ennis.map(vendormap => {
+                                    {ennis.map((vendormap, index) => {
                                         return (
-                                            <option key={vendormap.id} value={vendormap.value}>{vendormap.label}</option>
+                                            <option key={index} value={vendormap.value}>{vendormap.label}</option>
                                         )
                                     })}
                             </select>
@@ -173,9 +208,9 @@ const AddCircuit = () => {
                         </label>
                         {/* <div>  */}
                             <select onChange={(e) => setContractTerm(e.target.value)} id="contractterm" className="input input-bordered w-full max-w-xs">
-                                    {contractTerms.map(vendormap => {
+                                    {contractTerms.map((vendormap, index) => {
                                         return (
-                                            <option key={vendormap.id} value={vendormap.value}>{vendormap.label}</option>
+                                            <option key={index} value={vendormap.value}>{vendormap.label}</option>
                                         )
                                     })}
                             </select>
@@ -190,7 +225,7 @@ const AddCircuit = () => {
                             type="date" 
                             placeholder="Last Day of Contract"
                             required
-                            value = { lastDay }
+                            value = {lastDay}
                             onChange={(e) => setLastDay(e.target.value)} 
                         />
                     </div>
@@ -199,6 +234,23 @@ const AddCircuit = () => {
                 {/* Row 4 */}
                 <div className="border flex">
                     <div className="form-control flex-auto">
+                        <label htmlFor="siteA" className="label">
+                            <span className="label-text">Site A</span>
+                        </label>
+                        {/* <div>  */}
+                        <select onChange={(e) => setSiteA(e.target.value)} id="siteA" className="input input-bordered w-full max-w-xs">
+                            {options.map((option, index) => {
+                                <option key={index} value={option.value}>
+                                {option.label}
+                                </option>
+                            })}
+                        </select>
+                        {/* </div> */}
+                    </div>
+
+
+
+                    {/* <div className="form-control flex-auto">
                         <label className="label">
                             <span className="label-text">Site A (Node/DC)</span>    
                         </label>
@@ -209,7 +261,7 @@ const AddCircuit = () => {
                             value = { siteA }
                             onChange={(e) => setSiteA(e.target.value)} 
                         />
-                    </div>
+                    </div> */}
 
                     <div className="form-control flex-auto">
                         <label className="label">
@@ -232,8 +284,14 @@ const AddCircuit = () => {
             <p>{vendor}</p>
             <p>{circuitType}</p>
             <p>{speed}</p>
-            <p>{contractTerm}</p>
+            <p>{circuitNumber}</p>
             <p>{enni}</p>
+            <p>{vlan}</p>
+            <p>{startDate}</p>
+            <p>{contractTerm}</p>
+            <p>{lastDay}</p>
+            <p>{siteA}</p>
+            <p>{siteB}</p>
         </div>
         // </div>
         // </div>
