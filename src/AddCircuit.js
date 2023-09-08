@@ -51,7 +51,7 @@ const AddCircuit = () => {
     
 
     const vendors = [
-        {label: "Vendor", value: 'null'},
+        // {label: "Vendor", value: 'null'},
         {label: "DFA", value: "DFA"},
         {label: "Seacom", value: "Seacom"},
         {label: "Comsol", value: "Comsol"},
@@ -60,7 +60,7 @@ const AddCircuit = () => {
     ]
 
     const circuitTypes = [
-        {label: "Circuit Type", value: 'null'},
+        // {label: "Circuit Type", value: 'null'},
         {label: "Magellan", value: "Magellan"},
         {label: "Calypte", value: "Calypte"},
         {label: "GPON", value: "GPON"},
@@ -68,7 +68,7 @@ const AddCircuit = () => {
     ]
     
     const speeds = [
-        {label: "Speed", value: 'null'},
+        // {label: "Speed", value: 'null'},
         {label: "10Mbps", value: "10Mbps"},
         {label: "20Mbps", value: "20Mbps"},
         {label: "50Mbps", value: "50Mbps"},
@@ -76,7 +76,7 @@ const AddCircuit = () => {
     ]
 
     const contractTerms = [
-        {label: "Term", value: 'null'},
+        // {label: "Term", value: 'null'},
         {label: "12 Months", value: "12 Months"},
         {label: "24 Months", value: "24 Months"},
         {label: "36 Months", value: "36 Months"},
@@ -84,7 +84,7 @@ const AddCircuit = () => {
     ]
 
     const ennis = [
-        {label: "ENNI", value: 'null'},
+        // {label: "ENNI", value: 'null'},
         {label: "ENI21-0000123", value: "ENI21-0000123"},
         {label: "ENI11-0001059", value: "ENI11-0001059"},
         {label: "GNI21-0000071", value: "GNI21-0000071"},
@@ -103,7 +103,8 @@ const AddCircuit = () => {
                             <span className="label-text">Vendor</span>
                         </label>
                         {/* <div>  */}
-                            <select onChange={(e) => setVendor(e.target.value)} id="vendor" className="input input-bordered w-full max-w-xs">
+                            <select onChange={(e) => setVendor(e.target.value)} id="vendor" className="input input-bordered w-full max-w-xs" defaultValue='null'>
+                                <option value='null'>Choose an option...</option>
                                     {vendors.map((vendormap, index) => {
                                         return (
                                             <option key={index} value={vendormap.value}>{vendormap.label}</option>
@@ -118,7 +119,8 @@ const AddCircuit = () => {
                             <span className="label-text">Circuit Type</span>
                         </label>
                         {/* <div>  */}
-                            <select onChange={(e) => setCircuitType(e.target.value)} id="circuittype" className="input input-bordered w-full max-w-xs">
+                            <select onChange={(e) => setCircuitType(e.target.value)} id="circuittype" className="input input-bordered w-full max-w-xs" defaultValue='null'>
+                            <option value='null'>Choose an option...</option>
                                     {circuitTypes.map((vendormap, index) => {
                                         return (
                                             <option key={index} value={vendormap.value}>{vendormap.label}</option>
@@ -133,7 +135,8 @@ const AddCircuit = () => {
                             <span className="label-text">Speed</span>
                         </label>
                         {/* <div>  */}
-                            <select onChange={(e) => setSpeed(e.target.value)} id="speed" className="input input-bordered w-full max-w-xs">
+                            <select onChange={(e) => setSpeed(e.target.value)} id="speed" className="input input-bordered w-full max-w-xs"defaultValue='null'>
+                            <option value='null'>Choose an option...</option>
                                     {speeds.map((vendormap, index) => {
                                         return (
                                             <option key={index} value={vendormap.value}>{vendormap.label}</option>
@@ -164,7 +167,8 @@ const AddCircuit = () => {
                             <span className="label-text">ENNI</span>
                         </label>
                         {/* <div>  */}
-                            <select onChange={(e) => setEnni(e.target.value)} id="enni" className="input input-bordered w-full max-w-xs">
+                            <select onChange={(e) => setEnni(e.target.value)} id="enni" className="input input-bordered w-full max-w-xs" defaultValue='null'>
+                            <option value='null'>Choose an option...</option>
                                     {ennis.map((vendormap, index) => {
                                         return (
                                             <option key={index} value={vendormap.value}>{vendormap.label}</option>
@@ -207,7 +211,8 @@ const AddCircuit = () => {
                             <span className="label-text">Contract Term</span>
                         </label>
                         {/* <div>  */}
-                            <select onChange={(e) => setContractTerm(e.target.value)} id="contractterm" className="input input-bordered w-full max-w-xs">
+                            <select onChange={(e) => setContractTerm(e.target.value)} id="contractterm" className="input input-bordered w-full max-w-xs" defaultValue='null'>
+                            <option value='null'>Choose an option...</option>
                                     {contractTerms.map((vendormap, index) => {
                                         return (
                                             <option key={index} value={vendormap.value}>{vendormap.label}</option>
@@ -238,42 +243,31 @@ const AddCircuit = () => {
                             <span className="label-text">Site A</span>
                         </label>
                         {/* <div>  */}
-                        <select onChange={(e) => setSiteA(e.target.value)} id="siteA" className="input input-bordered w-full max-w-xs">
-                            {options.map((option, index) => {
-                                <option key={index} value={option.value}>
-                                {option.label}
-                                </option>
-                            })}
+                        <select onChange={(e) => handleChange(e.target.value)} id="siteA" className="input input-bordered w-full max-w-xs" defaultValue='null'>
+                            <option value='null'>Choose an option...</option> 
+                                {options.map((option, index) => {
+                                    <option key={index} value={option.value}>
+                                    {option.label}
+                                    </option>
+                                })}
                         </select>
                         {/* </div> */}
                     </div>
 
-
-
-                    {/* <div className="form-control flex-auto">
-                        <label className="label">
-                            <span className="label-text">Site A (Node/DC)</span>    
-                        </label>
-                        <input className="input input-bordered w-full max-w-xs"
-                            type="text" 
-                            placeholder="Site A (Node/DC)"
-                            required
-                            value = { siteA }
-                            onChange={(e) => setSiteA(e.target.value)} 
-                        />
-                    </div> */}
-
                     <div className="form-control flex-auto">
-                        <label className="label">
-                            <span className="label-text">Site B (Client)</span>    
+                        <label htmlFor="siteB" className="label">
+                            <span className="label-text">Site A</span>
                         </label>
-                        <input className="input input-bordered w-full max-w-xs"
-                            type="text" 
-                            placeholder="Site B (Client)"
-                            required
-                            value = { siteB }
-                            onChange={(e) => setSiteB(e.target.value)} 
-                        />
+                        {/* <div>  */}
+                        <select onChange={(e) => setSiteB(e.target.value)} id="siteB" className="input input-bordered w-full max-w-xs" defaultValue='null'>
+                            <option value='null'>Choose an option...</option> 
+                                {options.map((option, index) => {
+                                    <option key={index} value={option.value}>
+                                    {option.label}
+                                    </option>
+                                })}
+                        </select>
+                        {/* </div> */}
                     </div>
                 </div>
                 
