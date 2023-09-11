@@ -17,30 +17,35 @@ const AddCircuit = () => {
     const [siteB, setSiteB] = useState('');
     const [vlan, setVlan] = useState('');
     const [enni, setEnni] = useState('');
-
+    
     const [options, setOptions] = useState([]);
     const [selectedOption, setSelectedOption] = useState('');
-    useEffect(() => {
-        fetch(IP + '/getsite', {
-            method: 'GET',
-            headers: { "Authorization": 'Basic',
-                "Content-Type": 'application/json',
-                "Access-Control-Allow-Origin": 'true'},
-            // body: JSON.stringify(form),
-            mode: "cors",
-            credentials: "include"
-        }).then(res => {
-            console.log(res)
-            return res.json()
-        }).then(data => {
-            console.log(data)
-            if ('error' in data) {
-                alert(data['error'])
-            } else {
-                setOptions(data);
-            }
-        })
-    })
+
+    const fetchData = (value) =>{
+        // useEffect(() => {
+            fetch(IP + '/getsite', {
+                method: 'POST',
+                headers: { "Authorization": 'Basic',
+                    "Content-Type": 'application/json',
+                    "Access-Control-Allow-Origin": 'true'},
+                body: JSON.stringify(value),
+                mode: "cors",
+                credentials: "include"
+            }).then(res => {
+                console.log(res)
+                return res.json()
+            }).then(data => {
+                console.log(data)
+                // setSelectedOption(data)
+            })
+        // })
+    }
+
+    const handleChange = (value) => {
+        setOptions(value);
+        fetchData(value);
+    }
+
     // const addDays = (days) => {
     //     const newDate = startDate;
     //     newDate.setDate(startDate + days);
@@ -243,32 +248,35 @@ const AddCircuit = () => {
                             <span className="label-text">Site A</span>
                         </label>
                         {/* <div>  */}
-                        <select onChange={(e) => handleChange(e.target.value)} id="siteA" className="input input-bordered w-full max-w-xs" defaultValue='null'>
-                            <option value='null'>Choose an option...</option> 
+                        <input onChange={(e) => handleChange(e.target.value)} 
+                                id="siteA" 
+                                className="input input-bordered w-full max-w-xs" 
+                                value={options}
+                                placeholder='Type to search'>
+                            {/* <option>Choose an option...</option>  */}
                                 {options.map((option, index) => {
-                                    <option key={index} value={option.value}>
-                                    {option.label}
-                                    </option>
+                                    key={index} value={option.site}
+                                    {option.site}
                                 })}
-                        </select>
+                        </input>
                         {/* </div> */}
                     </div>
 
-                    <div className="form-control flex-auto">
+                    {/* <div className="form-control flex-auto">
                         <label htmlFor="siteB" className="label">
                             <span className="label-text">Site A</span>
-                        </label>
+                        </label> */}
                         {/* <div>  */}
-                        <select onChange={(e) => setSiteB(e.target.value)} id="siteB" className="input input-bordered w-full max-w-xs" defaultValue='null'>
+                        {/* <select onChange={(e) => setSiteB(e.target.value)} id="siteB" className="input input-bordered w-full max-w-xs" defaultValue='null'>
                             <option value='null'>Choose an option...</option> 
                                 {options.map((option, index) => {
                                     <option key={index} value={option.value}>
                                     {option.label}
                                     </option>
                                 })}
-                        </select>
+                        </select> */}
                         {/* </div> */}
-                    </div>
+                    {/* </div> */}
                 </div>
                 
                 <div className="form-control mt-2">
