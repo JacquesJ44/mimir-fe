@@ -36,13 +36,14 @@ const AddCircuit = () => {
                 return res.json()
             }).then(data => {
                 console.log(data)
-                // setSelectedOption(data)
+                setOptions(data)
             })
         // })
     }
 
     const handleChange = (value) => {
-        setOptions(value);
+        setSelectedOption(value);
+        // console.log(selectedOption);
         fetchData(value);
     }
 
@@ -140,7 +141,7 @@ const AddCircuit = () => {
                             <span className="label-text">Speed</span>
                         </label>
                         {/* <div>  */}
-                            <select onChange={(e) => setSpeed(e.target.value)} id="speed" className="input input-bordered w-full max-w-xs"defaultValue='null'>
+                            <select onChange={(e) => setSpeed(e.target.value)} id="speed" className="input input-bordered w-full max-w-xs" defaultValue='null'>
                             <option value='null'>Choose an option...</option>
                                     {speeds.map((vendormap, index) => {
                                         return (
@@ -251,14 +252,20 @@ const AddCircuit = () => {
                         <input onChange={(e) => handleChange(e.target.value)} 
                                 id="siteA" 
                                 className="input input-bordered w-full max-w-xs" 
-                                value={options}
+                                value={selectedOption}
                                 placeholder='Type to search'>
-                            {/* <option>Choose an option...</option>  */}
-                                {options.map((option, index) => {
-                                    key={index} value={option.site}
-                                    {option.site}
-                                })}
+                        {/* <div> */}
                         </input>
+                        <div>
+                            {Array.isArray(options) ? options.map((option, index) => {
+                                return <option key={index} value={option.site}>
+                                    {option.site}
+                                </option>}
+                                )
+                                : []}
+                         {/* {<option onChange={(e) = setOptions(e.target.value)}>{options['site']}</option>} */}
+                         </div>
+                         {/* </div>        */}
                         {/* </div> */}
                     </div>
 
