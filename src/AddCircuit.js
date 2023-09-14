@@ -1,6 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { IP } from './config.js';
-
 
 const AddCircuit = () => {
     
@@ -19,10 +18,9 @@ const AddCircuit = () => {
     const [enni, setEnni] = useState('');
     
     const [options, setOptions] = useState([]);
-    const [selectedOption, setSelectedOption] = useState('');
+    // const [selectedOption, setSelectedOption] = useState('');
 
     const fetchData = (value) =>{
-        // useEffect(() => {
             fetch(IP + '/getsite', {
                 method: 'POST',
                 headers: { "Authorization": 'Basic',
@@ -32,29 +30,23 @@ const AddCircuit = () => {
                 mode: "cors",
                 credentials: "include"
             }).then(res => {
-                console.log(res)
+                // console.log(res)
                 return res.json()
             }).then(data => {
                 console.log(data)
                 setOptions(data)
             })
-        // })
     }
 
-    const handleChange = (value) => {
-        setSelectedOption(value);
-        // console.log(selectedOption);
+    const handleChangeA = (value) => {
         fetchData(value);
+        setSiteA(value);
     }
-
-    // const addDays = (days) => {
-    //     const newDate = startDate;
-    //     newDate.setDate(startDate + days);
-    //     setLastDay(newDate);
-    //     console.log(lastDay)
-    // }
-
     
+    const handleChangeB = (value) => {
+        fetchData(value);
+        setSiteB(value);
+    }
 
     const vendors = [
         // {label: "Vendor", value: 'null'},
@@ -67,6 +59,7 @@ const AddCircuit = () => {
 
     const circuitTypes = [
         // {label: "Circuit Type", value: 'null'},
+        {label: "Helios", value: "Helios"},
         {label: "Magellan", value: "Magellan"},
         {label: "Calypte", value: "Calypte"},
         {label: "GPON", value: "GPON"},
@@ -79,6 +72,15 @@ const AddCircuit = () => {
         {label: "20Mbps", value: "20Mbps"},
         {label: "50Mbps", value: "50Mbps"},
         {label: "100Mbps", value: "100Mbps"},
+        {label: "200Mbps", value: "200Mbps"},
+        {label: "300Mbps", value: "300Mbps"},
+        {label: "500Mbps", value: "500Mbps"},
+        {label: "800Mbps", value: "800Mbps"},
+        {label: "1Gbps", value: "1Gbps"},
+        {label: "2Gbps", value: "2Gbps"},
+        {label: "3Gbps", value: "3Gbps"},
+        {label: "5Gbps", value: "5Gbps"},
+        {label: "10Gbps", value: "10Gbps"},
     ]
 
     const contractTerms = [
@@ -248,42 +250,47 @@ const AddCircuit = () => {
                         <label htmlFor="siteA" className="label">
                             <span className="label-text">Site A</span>
                         </label>
-                        {/* <div>  */}
-                        <input onChange={(e) => handleChange(e.target.value)} 
-                                id="siteA" 
-                                className="input input-bordered w-full max-w-xs" 
-                                value={selectedOption}
-                                placeholder='Type to search'>
-                        {/* <div> */}
-                        </input>
-                        <div>
-                            {Array.isArray(options) ? options.map((option, index) => {
-                                return <option key={index} value={option.site}>
-                                    {option.site}
-                                </option>}
+                        <div className="flex flex-col">
+                            <input onChange={(e) => handleChangeA(e.target.value)} 
+                                    list="siteA" 
+                                    className="input input-bordered w-full max-w-xs" 
+                                    placeholder='Type to search'
+                                    autoComplete="off"
+                                     />
+                           
+                             <datalist id='siteA'>
+                                {Array.isArray(options) ? options.map((option, index) => {
+                                    return <option key={index} value={option.site}>
+                                        {option.site}
+                                    </option>}
                                 )
-                                : []}
-                         {/* {<option onChange={(e) = setOptions(e.target.value)}>{options['site']}</option>} */}
-                         </div>
-                         {/* </div>        */}
-                        {/* </div> */}
+                                    : []}
+                            </datalist>
+                        </div>
                     </div>
 
-                    {/* <div className="form-control flex-auto">
+                    <div className="form-control flex-auto">
                         <label htmlFor="siteB" className="label">
-                            <span className="label-text">Site A</span>
-                        </label> */}
-                        {/* <div>  */}
-                        {/* <select onChange={(e) => setSiteB(e.target.value)} id="siteB" className="input input-bordered w-full max-w-xs" defaultValue='null'>
-                            <option value='null'>Choose an option...</option> 
-                                {options.map((option, index) => {
-                                    <option key={index} value={option.value}>
-                                    {option.label}
-                                    </option>
-                                })}
-                        </select> */}
-                        {/* </div> */}
-                    {/* </div> */}
+                            <span className="label-text">Site B</span>
+                        </label>
+                        <div className="flex flex-col">
+                            <input onChange={(e) => handleChangeB(e.target.value)} 
+                                    list="siteB" 
+                                    className="input input-bordered w-full max-w-xs" 
+                                    placeholder='Type to search'
+                                    autoComplete="off"
+                                     />
+                           
+                             <datalist id='siteB'>
+                                {Array.isArray(options) ? options.map((option, index) => {
+                                    return <option key={index} value={option.site}>
+                                        {option.site}
+                                    </option>}
+                                )
+                                    : []}
+                            </datalist>
+                        </div>
+                    </div>
                 </div>
                 
                 <div className="form-control mt-2">
@@ -302,8 +309,6 @@ const AddCircuit = () => {
             <p>{siteA}</p>
             <p>{siteB}</p>
         </div>
-        // </div>
-        // </div>
      );
 }
  
