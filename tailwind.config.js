@@ -1,7 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./src/**/*.{js,jsx,ts,tsx}",
-            require.resolve('react-widgets/styles.css'),          
+  content: ["./src/**/*.{js,jsx,ts,tsx}",          
   ],
   theme: {
       container: {
@@ -9,6 +8,6 @@ module.exports = {
     },
     extend: {},
   },
-  plugins: [require("daisyui", "react-widgets-tailwind")],
+  plugins: [require("daisyui")],
 }
 
