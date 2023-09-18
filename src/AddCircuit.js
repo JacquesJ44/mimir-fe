@@ -133,20 +133,15 @@ const AddCircuit = () => {
     }
 
     // Working with dates to set the last day of the contract equal to first day plus the contract term
-    
-    const [addmonths, setAddMonths] = useState()
-    const lastDay = (e) => {
-        setContractTerm(e.target.value);
-        setAddMonths(e.target.value);
-        console.log(contractTerm, addmonths)
-    }
-     
-    const lastDayFormatted = () => {
-        const lastDayDate = moments(new Date(startDate));
-        console.log(lastDayDate.format('YYYY-MM-DD'));
-        const formattedLastDayDate = lastDayDate.add(addmonths, 'months');
+    const lastDayDate = moments(new Date(startDate));
+    const lastDay = (value) => {
+        setContractTerm(value);
+        // console.log(formattedLastDayDate.format('YYYY-MM-DD'));
+        const formattedLastDayDate = lastDayDate.add(value, 'months');
+        // console.log(formattedLastDayDate.format('YYYY-MM-DD'));
         setEndDate(formattedLastDayDate.format('YYYY-MM-DD'));
-        console.log(endDate);
+        // console.log(endDate);
+
     }
 
     // The below are predefined sets of dropdown menus for the rest of the input fields
@@ -293,7 +288,7 @@ const AddCircuit = () => {
                         <label htmlFor="contractterm" className="label">
                             <span className="label-text">Contract Term</span>
                         </label>
-                        <select onChange={(e) => {lastDay(e); lastDayFormatted()}} id="contractterm" className="input input-bordered w-full max-w-xs" defaultValue='null'>
+                        <select onChange={(e) => {lastDay(e.target.value)}} id="contractterm" className="input input-bordered w-full max-w-xs" defaultValue='null'>
                         <option value="null">Choose an option...</option>
                                 {contractTerms.map((term, index) => {
                                     return (
