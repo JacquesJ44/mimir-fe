@@ -64,8 +64,8 @@ const AddCircuit = () => {
         })
 
         // 2. Handle the upload of the document and send it to the backend
-        const data = new FormData();
-        data.append('file')
+        // const data = new FormData();
+        // data.append('file')
     }
     
     // The following is for selecting a previously added site to a circuit. It is used for both SiteA and SiteB

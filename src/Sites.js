@@ -15,7 +15,6 @@ const Sites = () => {
     const [province, setProvince] = useState('');
 
     const [data, setData] = useState([])
-
     const handleSubmit = (e) => {
         e.preventDefault()
         const form = {
