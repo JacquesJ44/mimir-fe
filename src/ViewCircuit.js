@@ -40,15 +40,15 @@ const ViewCircuit = () => {
                 </div>
 
                 <div className="mt-5 md:mt-0 md:col-span-2 text-left">
-                  <strong>{data.vendor} | {data.circuit_type}</strong>
+                  <strong>{data.vendor} | {data.circuitType}</strong>
                   <div className="mt-5 md:mt-0 md:col-span-2 text-left"> 
-                    <strong>Circuit Number:  </strong> { data.circuit_number }<br/> 
+                    <strong>Circuit Number:  </strong> { data.circuitNumber }<br/> 
                     <strong>Speed:  </strong>{ data.speed }<br/>
                     <strong>ENNI:  </strong>{ data.enni }<br/>
                     <strong>VLAN ID:  </strong>{ data.vlan }<br/>
-                    <strong>Contract Start:  </strong>{ data.start_date }<br/>
-                    <strong>Contract Term:  </strong>{ data.contract_term }<br/>
-                    <strong>Contract End: </strong>{ data.end_date }<br/>
+                    <strong>Contract Start:  </strong>{ data.startDate }<br/>
+                    <strong>Contract Term:  </strong>{ data.contractTerm }<br/>
+                    <strong>Contract End: </strong>{ data.endDate }<br/>
                     <strong>Site A:  </strong>{ data.siteA }<br/>
                     <strong>Site B:  </strong>{ data.siteB }<br/>
                     <strong>Comments:  </strong>{ data.comments }<br/>

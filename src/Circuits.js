@@ -184,8 +184,8 @@ const Circuits = () => {
                         <label htmlFor="vendor" className="label">
                             <span className="label-text">Status</span>
                         </label>
-                        <select onChange={(e) => {setStatus(e.target.value)}} id="status" className="input input-bordered w-full max-w-xs" defaultValue='null'>
-                            <option value='null'>Choose status...</option>
+                        <select onChange={(e) => {setStatus(e.target.value)}} id="status" className="input input-bordered w-full max-w-xs" defaultValue=''>
+                            <option value=''>Choose status...</option>
                                 {contract_status.map((c, index) => {
                                     return (
                                         <option key={index} value={c}>{c}</option>
@@ -202,35 +202,13 @@ const Circuits = () => {
 
                 <div className="border flex font-sans">
             <table className="flex-auto table-auto border border-collapse my-10">
-                {/* <thead>
-                    <tr>
-                    <th className="border border-slate-600">ID</th>
-                    <th className="border border-slate-600">Type A</th>
-                    <th className="border border-slate-600">Type B</th>
-                    <th className="border border-slate-600">Deliver again from</th>
-                    <th className="border border-slate-600">Start from</th>
-                    <th className="border border-slate-600">Name</th>
-                    <th className="border border-slate-600">Surname</th>
-                    <th className="border border-slate-600">Email</th>
-                    <th className="border border-slate-600">Send notification</th>
-                    <th className="border border-slate-600">Forward Parcels</th>
-                    <th className="border border-slate-600">Infopost</th>
-                    <th className="border border-slate-600">Additional Contacts</th>
-                    <th className="border border-slate-600">From Address</th>
-                    <th className="border border-slate-600">To Address</th>
-                    <th className="border border-slate-600">Date Created</th>
-                    <th className="border border-slate-600">Paid</th>
-                    <th className="border border-slate-600">Term (Months)</th>
-                    <th className="border border-slate-600">Status</th>
-                    </tr>
-                </thead> */}
                 <tbody>
                     {data && data.map((c) => (
                         <tr key={c.id}>
                             <td className="border border-slate-700">{c.vendor}</td> 
-                            <td className="border border-slate-700">{c.circuit_type}</td> 
-                            <td className="border border-slate-700">{c.circuit_number}</td> 
-                            <td className="border border-slate-700">{c.start_date}</td> 
+                            <td className="border border-slate-700">{c.circuitType}</td> 
+                            <td className="border border-slate-700">{c.circuitNumber}</td> 
+                            <td className="border border-slate-700">{c.startDate}</td> 
                             <td className="border border-slate-700">{c.siteA}</td> 
                             <td className="border border-slate-700">{c.siteB}</td> 
                             {/* <td className="border border-slate-700">{c.suburb}</td> 
