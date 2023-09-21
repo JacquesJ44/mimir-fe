@@ -59,7 +59,19 @@ const ViewCircuit = () => {
               </div>
               <hr/>
 
-              <div className="px-4 py-3 bg-black-50 text-right sm:px-6 flex justify-end">
+              <div className="px-4 py-3 bg-black-50 text-right sm:px-6 flex justify-between">
+                <Link to={"/updatecircuit/" + id}>
+                  <button 
+                    // type="submit"
+                    // value="Delete"
+                    className="mx-2 inline-flex items-center px-3 py-2 border border-transparent shadow-sm text-sm leading-4 font-medium rounded-md text-black bg-gray-200 hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill Rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clipRule="evenodd" />
+                      </svg>
+                    Update
+                  </button>
+                </Link>
                 <Link to="/circuits">
                   <button
                     // type="submit"

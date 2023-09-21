@@ -12,6 +12,7 @@ import AddCircuit from './AddCircuit';
 import AddSite from './AddSite';
 import ViewSite from './ViewSite';
 import ViewCircuit from './ViewCircuit';
+import UpdateCircuit from './UpdateCircuit';
 
 import { AuthProvider, RequireAuth } from './Auth';
 // import { IP } from './config.js';
@@ -30,6 +31,7 @@ function App() {
                 <Route path='/viewsite/:site' element={<ViewSite />} />
                 <Route path='/circuits' element={<Circuits />} />
                 <Route path='/viewcircuit/:id' element={<ViewCircuit />} />
+                <Route path='/updatecircuit/:id' element={<UpdateCircuit />} />
                 <Route path='/addcircuit' element={<AddCircuit />} />
               </Route>
               

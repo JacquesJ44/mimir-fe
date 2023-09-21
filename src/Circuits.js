@@ -11,7 +11,7 @@ const Circuits = () => {
     const [siteB, setSiteB] = useState('');
     const [status, setStatus] = useState('');
 
-    const contract_status = ['Active', '<3 Months', 'Out of Contract', 'Cancelled'
+    const contract_status = ['Active', 'Cancelled'
         // { 
         //     status: ['active', '<3 months', 'out of contract', 'cancelled'],
         //     colour: ['green', 'orange', 'red', 'purple']

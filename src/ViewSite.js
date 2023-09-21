@@ -5,8 +5,8 @@ import { IP } from './config.js';
 const ViewSite = () => {
 
     const [data, setData] = useState([])
-    
     const {site}  = useParams()
+    // let navigate = useNavigate();
 
     useEffect(() => {
         window.scrollTo(0,0)
@@ -33,17 +33,19 @@ const ViewSite = () => {
           method: 'POST',
           headers: { "Authorization": 'Basic',
                     "Content-Type": 'application/json',
+                    // "Accept": "application/json",
                     "Access-Control-Allow-Origin": 'true'},
           mode: "cors",
           credentials: "include",
         })
-        // .then((data_) => {
-        //   data_.json().then((data__) => {
-        //     console.log(data__);
-        //     setData(data__);
-        //     console.log('deleted');
-        //   });
-        // })
+        .then((data_) => {
+          data_.json().then((data__) => {
+            console.log(data__);
+            setData(data__);
+            // navigate('/sites');
+            // console.log('deleted');
+          });
+        })
       }
 
       return ( 
@@ -52,7 +54,12 @@ const ViewSite = () => {
         <div className="md:grid md:grid-cols-1 md:gap-6">
           <div className="mt-5 md:mt-0 md:col-span-1">
             <div className="bg-black shadow px-4 py-5 sm:rounded-lg sm:p-6">
-
+            {'msg' in data ?   
+            <div className="md:grid md:grid-cols-3 md:gap-6 py-3">
+                <div className="md:col-span-1 text-left"></div>
+            <h3 className="text-lg font-medium leading-6 text-white-900">{data.msg}</h3>
+            </div>
+            :
               <div className="md:grid md:grid-cols-3 md:gap-6 py-3">
                 <div className="md:col-span-1 text-left">
                   <h3 className="text-lg font-medium leading-6 text-white-900">{data.site}</h3>
@@ -69,8 +76,8 @@ const ViewSite = () => {
                     { data.province }<br/>
                   </div>
                 </div>
-
               </div>
+              }
               <hr/>
 
               <div className="px-4 py-3 bg-black-50 text-right sm:px-6 flex justify-between">
