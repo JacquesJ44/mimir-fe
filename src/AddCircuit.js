@@ -216,9 +216,9 @@ const AddCircuit = () => {
                         </label>
                         <select onChange={(e) => setSpeed(e.target.value)} id="speed" className="input input-bordered w-full max-w-xs" defaultValue='null'>
                         <option value='null'>Choose an option...</option>
-                                {speeds.map((vendormap, index) => {
+                                {speeds.map((s, index) => {
                                     return (
-                                        <option key={index} value={vendormap.value}>{vendormap.label}</option>
+                                        <option key={index} value={s.value}>{s.label}</option>
                                     )
                                 })}
                         </select>
@@ -247,9 +247,9 @@ const AddCircuit = () => {
                         </label>
                         <select onChange={(e) => setEnni(e.target.value)} id="enni" className="input input-bordered w-full max-w-xs" defaultValue='null'>
                         <option value='null'>Choose an option...</option>
-                                {ennis.map((vendormap, index) => {
+                                {ennis.map((e, index) => {
                                     return (
-                                        <option key={index} value={vendormap.value}>{vendormap.label}</option>
+                                        <option key={index} value={e.value}>{e.label}</option>
                                     )
                                 })}
                         </select>

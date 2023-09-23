@@ -8,37 +8,32 @@ const UpdateCircuit = () => {
     const {id}  = useParams()
     const [data, setData] = useState([])
     useEffect(() => {
-        // window.scrollTo(0,0)
-    
-    fetch(IP + "/viewcircuit/" + id, {
-      method: 'GET',
-      headers: { "Authorization": 'Basic',
-                "Content-Type": 'application/json',
-                "Access-Control-Allow-Origin": 'true'},
-      mode: "cors",
-      credentials: "include",
-    }).then(res => {
-      return res.json();
-    }).then((data__) => {
-        console.log(data__);
-        setData(data__);
-      });
+        
+        fetch(IP + "/viewcircuit/" + id, {
+            method: 'GET',
+            headers: { "Authorization": 'Basic',
+            "Content-Type": 'application/json',
+            "Access-Control-Allow-Origin": 'true'},
+            mode: "cors",
+            credentials: "include",
+        }).then(res => {
+            return res.json();
+        }).then((data__) => {
+            console.log(data__);
+            setData(data__);
+        });
     }, [id])
-
+    
     // Main form data variables
-    const [vendor, setVendor] = useState('');
-    const [circuitType, setCircuitType] = useState('');
-    const [speed, setSpeed] = useState('');
-    const [circuitNumber, setCircuitNumber] = useState('');
-    const [enni, setEnni] = useState('');
-    const [vlan, setVlan] = useState('');
-    const [startDate, setStartDate] = useState('');
-    const [contractTerm, setContractTerm] = useState('');
-    const [endDate, setEndDate] = useState('');
-    // const [siteA, setSiteA] = useState('');
-    // const [siteB, setSiteB] = useState('');
-    const [comments, setComments] = useState('');
+    const [speed, setSpeed] = useState(data.speed);
+    const [startDate, setStartDate] = useState(data.startDate);
+    const [contractTerm, setContractTerm] = useState(data.contractTerm);
+    const [endDate, setEndDate] = useState(data.endDate);
+    const [comments, setComments] = useState(data.comments);
+    const [status, setStatus] = useState(data.status);
 
+    const contract_status = ['Active', 'Cancelled'];
+    
     let navigate = useNavigate();
 
     // Upon submitting the form we'll: 
@@ -49,18 +44,13 @@ const UpdateCircuit = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         const form = {
-            vendor: vendor,
-            circuitType: circuitType,
+            id: id,
             speed: speed,
-            circuitNumber: circuitNumber,
-            enni: enni,
-            vlan: vlan,
             startDate: startDate,
             contractTerm: contractTerm,
             endDate: endDate,
-            // siteA: siteA,
-            // siteB: siteB,
-            comments: comments
+            comments: comments,
+            status: status
         };
         fetch(IP + '/updatecircuit/' + id, {
             method: 'POST',
@@ -70,7 +60,8 @@ const UpdateCircuit = () => {
             body: JSON.stringify(form),
             mode: "cors",
             credentials: "include"
-        }).then(res => {
+        })
+        .then(res => {
             console.log(res)
             return res.json()
         }).then(data => {
@@ -88,39 +79,6 @@ const UpdateCircuit = () => {
         // data.append('file')
     }
     
-    // Setting Vendor and CircuitType variables for selection in cascading style, followed by fundtions to set in the form defined above 
-    const vendors = [
-        {
-            vendor: 'DFA',
-            type: ['Helios', 'Magellan', 'Calypte', 'Peregrin', 'Business Broadband', 'Tachyon']
-               
-        },
-        {
-            vendor: 'Seacom',
-            type: ['FTTB', 'FTTH']
-        },
-        {
-            vendor: 'Comsol',
-            type: ['CX Broadband (PtMP)', 'CX Plus Broadband (PTP)']
-            
-        },
-        {
-            vendor: 'Frogfoot',
-            type: ['FTTB', 'FTTH']
-        }
-    ]
-
-    const [circuitTypes, setCircuitTypes] = useState([])
-
-    const changeVendor = (e) => {
-        setVendor(e.target.value);
-        setCircuitTypes(vendors.find((v) => v.vendor === e.target.value).type);
-    }
-
-    const changeCircuitType = (e) => {
-        setCircuitType(e.target.value);
-    }
-
     // Working with dates to set the last day of the contract equal to first day plus the contract term
     const lastDayDate = moments(new Date(startDate));
     const lastDay = (value) => {
@@ -157,108 +115,42 @@ const UpdateCircuit = () => {
         {label: "60 Months", value: "60"},
     ]
 
-    const ennis = [
-        {label: "ENI21-0000123", value: "ENI21-0000123"},
-        {label: "ENI11-0001059", value: "ENI11-0001059"},
-        {label: "GNI21-0000071", value: "GNI21-0000071"},
-    ]
-
     return ( 
-        // <div className="h-screen flex items-center justify-center border">
-        // <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-200">
-        
+        <>
         <div className="border card-body">
             <form onSubmit={handleSubmit}>
+                <h1>{data.vendor} | {data.circuitType} | {data.circuitNumber}</h1>
                 {/* Row 1 */}
                 <div className="border flex">
                     <div className="form-control flex-auto">
-                        <label htmlFor="vendor" className="label">
-                            <span className="label-text">Vendor</span>
+                        <label htmlFor="speed" className="label">
+                            <span className="label-text">Speed</span>
                         </label>
-                        <select onChange={changeVendor} id="vendor" className="input input-bordered w-full max-w-xs" defaultValue={data.vendor}>
-                            <option value={data.vendor}>{data.vendor}</option>
-                                {vendors.map((v, index) => {
+                        <select onChange={(e) => setSpeed(e.target.value)} id="speed" className="input input-bordered w-full max-w-xs" defaultValue={speed ? speed : data.speed}>
+                        <option value={speed ? speed : data.speed}>{data.speed}</option>
+                                {speeds.map((s, index) => {
                                     return (
-                                        <option key={index} value={v.vendor}>{v.vendor}</option>
+                                        <option key={index} value={s.value}>{s.label}</option>
                                     )
                                 })}
                         </select>
                     </div>
-
                     <div className="form-control flex-auto">
-                        <label htmlFor="circuittype" className="label">
-                            <span className="label-text">Circuit Type</span>
+                        <label htmlFor="vendor" className="label">
+                            <span className="label-text">Status</span>
                         </label>
-                        <select onChange={changeCircuitType} id="circuittype" className="input input-bordered w-full max-w-xs" defaultValue={data.circuitType}>
-                        <option value={data.circuitType}>{data.circuitType}</option>
-                                {circuitTypes.map((c, index) => {
+                        <select onChange={(e) => {setStatus(e.target.value)}} id="status" className="input input-bordered w-full max-w-xs" defaultValue={status ? status : data.status}>
+                            <option value={status ? status : data.status}>{data.status}</option>
+                                {contract_status.map((c, index) => {
                                     return (
                                         <option key={index} value={c}>{c}</option>
                                     )
                                 })}
                         </select>
                     </div>
-
-                    <div className="form-control flex-auto">
-                        <label htmlFor="speed" className="label">
-                            <span className="label-text">Speed</span>
-                        </label>
-                        <select onChange={(e) => setSpeed(e.target.value)} id="speed" className="input input-bordered w-full max-w-xs" defaultValue={data.speed}>
-                        <option value={data.speed}>{data.speed}</option>
-                                {speeds.map((vendormap, index) => {
-                                    return (
-                                        <option key={index} value={vendormap.value}>{vendormap.label}</option>
-                                    )
-                                })}
-                        </select>
-                    </div>
-
-                    <div className="form-control flex-auto">
-                        <label className="label">
-                            <span className="label-text">Circuit Number</span>    
-                        </label>
-                        <input className="input input-bordered w-full max-w-xs"
-                            type="text" 
-                            placeholder="Circuit Number"
-                            required
-                            defaultValue = { data.circuitNumber }
-                            onChange={(e) => setCircuitNumber(e.target.value)} 
-                            />
-                    </div>
                 </div>
 
-                {/* Row 2 - Display only if Vendor is set to 'DFA' */}
-                { (data.vendor === 'DFA') &&
-                <div className="border flex">
-                    <div className="form-control flex-auto">
-                        <label htmlFor="enni" className="label">
-                            <span className="label-text">ENNI</span>
-                        </label>
-                        <select onChange={(e) => setEnni(e.target.value)} id="enni" className="input input-bordered w-full max-w-xs" defaultValue={data.enni}>
-                        <option value={data.enni}>{data.enni}</option>
-                                {ennis.map((vendormap, index) => {
-                                    return (
-                                        <option key={index} value={vendormap.value}>{vendormap.label}</option>
-                                    )
-                                })}
-                        </select>
-                    </div>
-
-                    <div className="form-control flex-auto">
-                        <label className="label">
-                            <span className="label-text">VLAN ID</span>    
-                        </label>
-                        <input className="input input-bordered w-full max-w-xs"
-                            type="text"
-                            placeholder="VLAN ID"
-                            defaultValue = { data.vlan }
-                            onChange={(e) => setVlan(e.target.value)} 
-                        />
-                    </div>
-                </div>
-                }
-
-                {/* Row 3 */}
+                {/* Row 2 */}
                 <div className="border flex">
                     <div className="form-control flex-auto">
                         <label className="label">
@@ -268,7 +160,7 @@ const UpdateCircuit = () => {
                             type="date" 
                             placeholder="Start Date"
                             required
-                            defaultValue = { data.startDate }
+                            defaultValue = { startDate ? startDate : data.startDate }
                             onChange={(e) => setStartDate(e.target.value)} 
                         />
                     </div>
@@ -277,8 +169,8 @@ const UpdateCircuit = () => {
                         <label htmlFor="contractterm" className="label">
                             <span className="label-text">Contract Term</span>
                         </label>
-                        <select onChange={(e) => {lastDay(e.target.value)}} id="contractterm" className="input input-bordered w-full max-w-xs" defaultValue={data.contractTerm}>
-                        <option value={data.contractTerm}>{data.contractTerm}</option>
+                        <select onChange={(e) => {lastDay(e.target.value)}} id="contractterm" className="input input-bordered w-full max-w-xs" defaultValue={contractTerm ? contractTerm : data.contractTerm}>
+                        <option value={contractTerm ? contractTerm : data.contractTerm}>{data.contractTerm}</option>
                                 {contractTerms.map((term, index) => {
                                     return (
                                         <option key={index} value={term.value}>{term.label}</option>
@@ -293,43 +185,13 @@ const UpdateCircuit = () => {
                         </label>
                         <input className="input input-bordered w-full max-w-xs"
                             type="date" 
-                            
                             readOnly
-                            // onChange={(e) => setEndDate(e.target.value)} 
-                            defaultValue = { data.endDate }
-                            onc
+                            defaultValue={endDate ? endDate : data.endDate}
                         />
                     </div>
                 </div>
 
-                {/* Row 4 */}
-                <div className="border flex">
-                    <div className="form-control flex-auto">
-                        <label htmlFor="siteA" className="label">
-                            <span className="label-text">Site A</span>
-                        </label>
-                        <div className="flex flex-col">
-                            <input value={data.siteA}
-                                    readOnly
-                                    className="input input-bordered w-full max-w-xs" 
-                                     />
-                        </div>
-                    </div>
-
-                    <div className="form-control flex-auto">
-                        <label htmlFor="siteB" className="label">
-                            <span className="label-text">Site B</span>
-                        </label>
-                        <div className="flex flex-col">
-                            <input value={data.siteB}
-                                    readOnly
-                                    className="input input-bordered w-full max-w-xs" 
-                                     />
-                        </div>
-                    </div>
-                </div>
-                
-                {/* Row 5 */}
+                {/* Row 3 */}
                 <div className="border form-control flex-auto">
                     <label className="label">
                         <span className="label-text">Additional Comments</span>    
@@ -337,7 +199,7 @@ const UpdateCircuit = () => {
                     <textarea className="input input-bordered w-full"
                         type="text" 
                         placeholder="Additional Comments..."
-                        defaultValue = {data.comments}
+                        defaultValue = {comments ? comments : data.comments}
                         onChange={(e) => setComments(e.target.value)} 
                     />
                     <label className="label">
@@ -353,19 +215,14 @@ const UpdateCircuit = () => {
                     <button className="btn btn-accent w-full max-w-xs">Update</button>
                 </div>
             </form>
-            <p>{vendor}</p>
-            <p>{circuitType}</p>
-            <p>{speed}</p>
-            <p>{circuitNumber}</p>
-            <p>{enni}</p>
-            <p>{vlan}</p>
-            <p>{startDate}</p>
-            <p>{contractTerm}</p>
-            <p>{endDate}</p>
-            {/* <p>{siteA}</p>
-            <p>{siteB}</p> */}
-            <p>{comments}</p>
+            <p>{speed ? speed + 'new': data.speed + 'old'}</p>
+            <p>{startDate ? startDate : data.startDate + 'old'}</p>
+            <p>{contractTerm ? contractTerm : data.contractTerm + 'old'}</p>
+            <p>{endDate ? endDate : data.endDate + 'old'}</p>
+            <p>{comments ? comments : data.comments + 'old'}</p>
+            <p>{status ? status : data.status + 'old'}</p>
         </div>
+    </>
      );
 }
  

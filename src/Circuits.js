@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from 'react-router-dom';
 import { IP } from './config.js';
+import moments from "moment";
 
 const Circuits = () => {
     const [vendor, setVendor] = useState('');
@@ -51,6 +52,9 @@ const Circuits = () => {
             }
         })
     }
+
+    const today = moments(new Date());
+
 
     return ( 
         // <div className="h-screen flex items-center justify-center border">
@@ -205,6 +209,14 @@ const Circuits = () => {
                 <tbody>
                     {data && data.map((c) => (
                         <tr key={c.id}>
+                            {c.status === 'Cancelled' ?
+                            <td className="border border-slate-700 bg-purple-500 w-5"></td>
+                            :
+                                today.format('YYYY-MM-DD') < c.endDate ?
+                                <td className="border border-slate-700 bg-green-500 w-5" ></td>
+                                :
+                                <td className="border border-slate-700 bg-red-500 w-5"></td>}
+                            {/* <td className="border border-slate-700 bg-orange-500 w-5"></td>  */}
                             <td className="border border-slate-700">{c.vendor}</td> 
                             <td className="border border-slate-700">{c.circuitType}</td> 
                             <td className="border border-slate-700">{c.circuitNumber}</td> 
