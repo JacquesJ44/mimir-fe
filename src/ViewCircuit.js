@@ -27,6 +27,20 @@ const ViewCircuit = () => {
     
       },[id])
 
+      const fetchFile = () => {
+        console.log('fetch')
+        fetch(IP + '/download/' + id, {
+          method: 'POST',
+          // headers: { "Authorization": 'Basic',
+          //     "Content-Type": 'application/pdf',
+          //     "Access-Control-Allow-Origin": 'true'},
+          // body: formData,
+          mode: "cors",
+          credentials: "include"
+      }
+        )
+    }
+
     return ( 
         <>
       <div className="mt-10 sm:mt-0">
@@ -53,8 +67,9 @@ const ViewCircuit = () => {
                     <strong>Site B:  </strong>{ data.siteB }<br/>
                     <strong>Comments:  </strong>{ data.comments }<br/>
                     <strong>Status:  </strong>{ data.status }<br/>
-                    <strong>Document:   
-                    <a href={IP + '/docs/' + data.doc} target="_blank" rel='noopener noreferrer' download={IP + '/docs/' + data.doc}>{ data.doc }</a>
+                    <strong>Document:
+                      <button onClick={fetchFile}>{data.doc}</button>   
+                    {/* <a href={'/Users/jacquesdutoit/Documents/vsc/mimer-be/docs/' + data.doc} target="_blank" rel='noopener noreferrer' download={'/Users/jacquesdutoit/Documents/vsc/mimer-be/docs/' + data.doc}>{ data.doc }</a> */}
                     </strong>
                     <br/>
                   </div>
