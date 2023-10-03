@@ -53,6 +53,10 @@ const ViewCircuit = () => {
                     <strong>Site B:  </strong>{ data.siteB }<br/>
                     <strong>Comments:  </strong>{ data.comments }<br/>
                     <strong>Status:  </strong>{ data.status }<br/>
+                    <strong>Document:   
+                    <a href={IP + '/docs/' + data.doc} target="_blank" rel='noopener noreferrer' download={IP + '/docs/' + data.doc}>{ data.doc }</a>
+                    </strong>
+                    <br/>
                   </div>
                 </div>
 

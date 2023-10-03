@@ -220,7 +220,8 @@ const Circuits = () => {
                             <td className="border border-slate-700">{c.vendor}</td> 
                             <td className="border border-slate-700">{c.circuitType}</td> 
                             <td className="border border-slate-700">{c.circuitNumber}</td> 
-                            <td className="border border-slate-700">{c.startDate}</td> 
+                            <td className="border border-slate-700">{c.enni}</td> 
+                            <td className="border border-slate-700">{c.vlan}</td> 
                             <td className="border border-slate-700">{c.siteA}</td> 
                             <td className="border border-slate-700">{c.siteB}</td> 
                             {/* <td className="border border-slate-700">{c.suburb}</td> 
