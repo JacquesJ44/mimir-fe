@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import { Link, useParams } from 'react-router-dom';
 import { IP } from './config.js';
+// import ViewHandover from "./ViewHandover.js";
+import PdfViewerComponent from "./PDFViewerComponent.js";
 
 const ViewCircuit = () => {
 
     const [data, setData] = useState([])
-    
+    const [file, setFile] = useState([])
     const {id}  = useParams()
 
     useEffect(() => {
@@ -28,21 +30,33 @@ const ViewCircuit = () => {
       },[id])
 
       const fetchFile = () => {
-        console.log('fetch')
+        console.log('fetchFile')
         fetch(IP + '/download/' + id, {
-          method: 'POST',
-          // headers: { "Authorization": 'Basic',
-          //     "Content-Type": 'application/pdf',
-          //     "Access-Control-Allow-Origin": 'true'},
+          method: 'GET',
+          headers: { "Authorization": 'Basic',
+              "Content-Type": 'application/json',
+              "Access-Control-Allow-Origin": 'true'},
           // body: formData,
           mode: "cors",
           credentials: "include"
-      }
-        )
-    }
+      }).then((data_) => {
+        data_.json().then((data__) => {
+          console.log(data__);
+          setFile(data__);
+          
+          // console.log()
+        });
+    })
+  }
 
     return ( 
         <>
+        { file ? 
+
+      <div className="PDF-viewer">
+        <PdfViewerComponent document={data.doc} />
+      </div>
+      :
       <div className="mt-10 sm:mt-0">
         <div className="md:grid md:grid-cols-1 md:gap-6">
           <div className="mt-5 md:mt-0 md:col-span-1">
@@ -69,7 +83,7 @@ const ViewCircuit = () => {
                     <strong>Status:  </strong>{ data.status }<br/>
                     <strong>Document:
                       <button onClick={fetchFile}>{data.doc}</button>   
-                    {/* <a href={'/Users/jacquesdutoit/Documents/vsc/mimer-be/docs/' + data.doc} target="_blank" rel='noopener noreferrer' download={'/Users/jacquesdutoit/Documents/vsc/mimer-be/docs/' + data.doc}>{ data.doc }</a> */}
+                    {/* <a href={file} target="_blank" rel='noopener noreferrer' >{ data.doc }</a> */}
                     </strong>
                     <br/>
                   </div>
@@ -109,6 +123,7 @@ const ViewCircuit = () => {
           </div>
         </div>
       </div>
+    }
     </>
      );
 }
