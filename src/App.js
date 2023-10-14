@@ -13,6 +13,7 @@ import AddSite from './AddSite';
 import ViewSite from './ViewSite';
 import ViewCircuit from './ViewCircuit';
 import UpdateCircuit from './UpdateCircuit';
+import Register from './Register';
 
 import { AuthProvider, RequireAuth } from './Auth';
 // import { IP } from './config.js';
@@ -37,6 +38,7 @@ function App() {
               
               <Route path='/' element={<Login />} />
               <Route path='/logout' element={<Logout />} />
+              <Route path='/register' element={<Register />} />
             </Routes>
           </div> 
         </div>
