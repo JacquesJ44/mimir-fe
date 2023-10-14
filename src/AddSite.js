@@ -53,6 +53,19 @@ const AddSite = () => {
         })
     }
 
+    // The below are predefined sets of dropdown menus for province
+    const provinces = [
+        {label: "Eastern Cape", value: "Eastern Cape"},
+        {label: "Free State", value: "Free State"},
+        {label: "Gauteng", value: "Gauteng"},
+        {label: "KwaZulu-Natal", value: "KwaZulu-Natal"},
+        {label: "Limpopo", value: "Limpopo"},
+        {label: "Mpumalanga", value: "Mpumalanga"},
+        {label: "Northern Cape", value: "Northern Cape"},
+        {label: "North West", value: "North West"},
+        {label: "Western Cape", value: "Western Cape"},
+    ]
+
     return (  
         // <div className="h-screen flex items-center justify-center border">
         // <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-200">
@@ -184,16 +197,17 @@ const AddSite = () => {
                     </div>
                     
                     <div className="form-control flex-auto">
-                        <label className="label">
-                            <span className="label-text">Province</span>    
+                        <label htmlFor="contractterm" className="label">
+                            <span className="label-text">Province</span>
                         </label>
-                        <input className="input input-bordered w-full max-w-xs"
-                            type="text" 
-                            placeholder="Province"
-                            required
-                            value = { province }
-                            onChange={(e) => setProvince(e.target.value)} 
-                        />
+                        <select onChange={(e) => {setProvince(e.target.value)}} id="contractterm" className="input input-bordered w-full max-w-xs" defaultValue='null'>
+                        <option value="null">Choose an option...</option>
+                                {provinces.map((p, index) => {
+                                    return (
+                                        <option key={index} value={p.value}>{p.label}</option>
+                                    )
+                                })}
+                        </select>
                     </div>
                 </div>
                 

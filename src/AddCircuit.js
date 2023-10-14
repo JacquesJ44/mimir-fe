@@ -18,6 +18,7 @@ const AddCircuit = () => {
     const [siteA, setSiteA] = useState('');
     const [siteB, setSiteB] = useState('');
     const [comments, setComments] = useState('');
+    const [doc, setDoc] = useState('');
 
     let navigate = useNavigate();
 
@@ -40,7 +41,8 @@ const AddCircuit = () => {
             endDate: endDate,
             siteA: siteA,
             siteB: siteB,
-            comments: comments
+            comments: comments,
+            doc: doc
         };
         fetch(IP + '/addcircuit', {
             method: 'POST',
@@ -62,12 +64,40 @@ const AddCircuit = () => {
                 navigate('/circuits')
             }
         })
-
-        // 2. Handle the upload of the document and send it to the backend
-        // const data = new FormData();
-        // data.append('file')
     }
-    
+        // 2. Handle the upload of the document and send it to the backend
+        const handleUpload = (e) => {
+            e.preventDefault()
+            const formFile = document.getElementById('formFile')
+            const formData = new FormData();
+            formData.append('formFile', formFile.files[0]);
+            console.log(formFile.files.length)
+            
+            if (formFile.files.length > 0){
+                fetch(IP + '/upload', {
+                    method: 'POST',
+                    // headers: { "Authorization": 'Basic',
+                    //     "Content-Type": 'application/pdf',
+                    //     "Access-Control-Allow-Origin": 'true'},
+                    body: formData,
+                    mode: "cors",
+                    credentials: "include"
+                }).then(res => {
+                    console.log(res)
+                    return res.json()
+                }).then(data => {
+                    console.log(data)
+                    if ('error' in data) {
+                        alert(data['error'])
+                    } else {
+                        handleSubmit(e)
+                    }
+                })
+            } else {
+                 handleSubmit(e)
+              }
+    }
+
     // The following is for selecting a previously added site to a circuit. It is used for both SiteA and SiteB
     const [options, setOptions] = useState([]);
 
@@ -179,7 +209,7 @@ const AddCircuit = () => {
         // <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-200">
         
         <div className="border card-body">
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={(e) => {handleUpload(e)}}>
                 {/* Row 1 */}
                 <div className="border flex">
                     <div className="form-control flex-auto">
@@ -381,11 +411,13 @@ const AddCircuit = () => {
                     <input
                         className="relative m-0 block w-full min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-clip-padding px-3 py-[0.32rem] text-base font-normal text-neutral-700 transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:overflow-hidden file:rounded-none file:border-0 file:border-solid file:border-inherit file:bg-neutral-100 file:px-3 file:py-[0.32rem] file:text-neutral-700 file:transition file:duration-150 file:ease-in-out file:[border-inline-end-width:1px] file:[margin-inline-end:0.75rem] hover:file:bg-neutral-200 focus:border-primary focus:text-neutral-700 focus:shadow-te-primary focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:file:bg-neutral-700 dark:file:text-neutral-100 dark:focus:border-primary"
                         type="file"
-                        id="formFile" />
+                        id="formFile"
+                        onChange={(e) => setDoc(e.target.value)}
+                        />
                 </div>
                 
                 <div className="form-control mt-2">
-                    <button className="btn btn-accent w-full max-w-xs">Save</button>
+                    <button className="btn btn-accent w-full max-w-xs" type='submit'>Save</button>
                 </div>
             </form>
             <p>{vendor}</p>
@@ -400,6 +432,7 @@ const AddCircuit = () => {
             <p>{siteA}</p>
             <p>{siteB}</p>
             <p>{comments}</p>
+            <p>{doc}</p>
         </div>
      );
 }

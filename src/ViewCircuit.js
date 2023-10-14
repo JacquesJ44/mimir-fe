@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react";
 import { Link, useParams } from 'react-router-dom';
 import { IP } from './config.js';
+import ViewHandover from "./ViewHandover.js";
+// import ViewHandover from "./ViewHandover.js";
+// import PdfViewerComponent from "./PDFViewerComponent.js";
 
 const ViewCircuit = () => {
 
     const [data, setData] = useState([])
-    
+    const [file, setFile] = useState(false)
     const {id}  = useParams()
 
     useEffect(() => {
@@ -22,13 +25,42 @@ const ViewCircuit = () => {
           data_.json().then((data__) => {
             console.log(data__);
             setData(data__);
+            // console.log(data.doc);
           });
         })
     
       },[id])
 
+      // const fetchFile = () => {
+      //   setFile(true)
+      //   console.log(file)
+      //   console.log('fetchFile')
+      //   fetch(IP + '/download/' + id, {
+      //     method: 'GET',
+      //     headers: { "Authorization": 'Basic',
+      //         "Content-Type": 'application/pdf',
+      //         "Access-Control-Allow-Origin": 'true'},
+      //     // body: formData,
+      //     mode: "cors",
+      //     credentials: "include"
+      // }).then((data_) => {
+      //   data_.blob().then((data__) => {
+      //     console.log(data__);
+      //     setFile(data__);
+          
+          // console.log()
+    //     });
+    // })
+  // }
+
     return ( 
         <>
+        { file ? 
+
+
+        <ViewHandover element={data.doc}/>
+     
+      :
       <div className="mt-10 sm:mt-0">
         <div className="md:grid md:grid-cols-1 md:gap-6">
           <div className="mt-5 md:mt-0 md:col-span-1">
@@ -53,6 +85,11 @@ const ViewCircuit = () => {
                     <strong>Site B:  </strong>{ data.siteB }<br/>
                     <strong>Comments:  </strong>{ data.comments }<br/>
                     <strong>Status:  </strong>{ data.status }<br/>
+                    <strong>Document:
+                      <button onClick={(e) => {setFile(true)}}>{data.doc}</button>   
+                    {/* <a href={file} target="_blank" rel='noopener noreferrer' >{ data.doc }</a> */}
+                    </strong>
+                    <br/>
                   </div>
                 </div>
 
@@ -90,6 +127,7 @@ const ViewCircuit = () => {
           </div>
         </div>
       </div>
+  }
     </>
      );
 }
