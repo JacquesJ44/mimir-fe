@@ -41,10 +41,10 @@ const Circuits = () => {
             mode: "cors",
             credentials: "include"
         }).then(res => {
-            console.log(res)
+            // console.log(res)
             return res.json()
         }).then(data => {
-            console.log(data)
+            // console.log(data)
             if ('error' in data) {
                 alert(data['error'])
             } else {
@@ -60,13 +60,13 @@ const Circuits = () => {
         // <div className="h-screen flex items-center justify-center border">
         // <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-200">
         
-            <div className="border card-body">
-                <div className="border flex justify-end max-w">
+            <div className="card-body">
+                <div className="flex justify-end max-w">
                     <Link to='/addcircuit' className="btn btn-accent">Add Circuit</Link>
                 </div>
 
                 <form onSubmit={handleSubmit}>
-                    <div className="border flex items-justify mt-5">
+                    <div className="flex items-justify mt-5">
                     <div className="form-control mx-1">
                         <label className="label">
                             <span className="label-text">Vendor</span>    
@@ -204,8 +204,8 @@ const Circuits = () => {
                     </div>
                 </form>
 
-                <div className="border flex font-sans">
-            <table className="flex-auto table-auto border border-collapse my-10">
+                <div className="flex font-sans">
+            <table className="flex-auto table-auto border-collapse my-10">
                 <tbody>
                     {data && data.map((c) => (
                         <tr key={c.id}>

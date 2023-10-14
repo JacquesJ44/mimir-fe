@@ -47,7 +47,7 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/b
         useEffect(() => {
         
     // const fetchFile = () => {
-        console.log('fetchFile')
+        // console.log('fetchFile')
         fetch(IP + '/download/' + id, {
           method: 'GET',
           headers: { "Authorization": 'Basic',
@@ -58,7 +58,7 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/b
           credentials: "include"
       }).then((data_) => {
         data_.blob().then((data__) => {
-          console.log(data__);
+          // console.log(data__);
           setFile(data__);
         //   console.log(file)
         });

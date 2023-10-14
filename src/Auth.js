@@ -27,7 +27,7 @@ export const AuthProvider = ({ children }) => {
             setUser(null);
             // console.log(user);
         }).then((json) => {
-            console.log("LOG", json);
+            // console.log("LOG", json);
             if ('error' in json) {
                 setUser(null);
                 return {};

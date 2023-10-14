@@ -40,10 +40,10 @@ const AddSite = () => {
             mode: "cors",
             credentials: "include"
         }).then(res => {
-            console.log(res)
+            // console.log(res)
             return res.json()
         }).then(data => {
-            console.log(data)
+            // console.log(data)
             if ('error' in data) {
                 alert(data['error'])
             } else if ('msg' in data) {
@@ -70,10 +70,10 @@ const AddSite = () => {
         // <div className="h-screen flex items-center justify-center border">
         // <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-200">
         
-        <div className="border card-body">
+        <div className="card-body">
             <form onSubmit={handleSubmit}>
                 {/* Row 1 */}
-                <div className="border flex">
+                <div className="flex">
                     <div className="form-control flex-auto">
                         <label className="label">
                             <span className="label-text">Site</span>    
@@ -115,7 +115,7 @@ const AddSite = () => {
                 </div>
 
                 {/* Row 2 */}
-                <div className="border flex">
+                <div className="flex">
                     <div className="form-control flex-auto">
                         <label className="label">
                             <span className="label-text">Building Name</span>    
@@ -169,7 +169,7 @@ const AddSite = () => {
                 </div>
 
                 {/* Row 3 */}
-                <div className="border flex">
+                <div className="flex">
                     <div className="form-control flex-auto">
                         <label className="label">
                             <span className="label-text">City</span>    

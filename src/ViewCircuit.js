@@ -23,7 +23,7 @@ const ViewCircuit = () => {
           credentials: "include",
         }).then((data_) => {
           data_.json().then((data__) => {
-            console.log(data__);
+            // console.log(data__);
             setData(data__);
             // console.log(data.doc);
           });
@@ -31,35 +31,9 @@ const ViewCircuit = () => {
     
       },[id])
 
-      // const fetchFile = () => {
-      //   setFile(true)
-      //   console.log(file)
-      //   console.log('fetchFile')
-      //   fetch(IP + '/download/' + id, {
-      //     method: 'GET',
-      //     headers: { "Authorization": 'Basic',
-      //         "Content-Type": 'application/pdf',
-      //         "Access-Control-Allow-Origin": 'true'},
-      //     // body: formData,
-      //     mode: "cors",
-      //     credentials: "include"
-      // }).then((data_) => {
-      //   data_.blob().then((data__) => {
-      //     console.log(data__);
-      //     setFile(data__);
-          
-          // console.log()
-    //     });
-    // })
-  // }
-
     return ( 
         <>
-        { file ? 
-
-
-        <ViewHandover element={data.doc}/>
-     
+        { file ? <ViewHandover element={data.doc}/>
       :
       <div className="mt-10 sm:mt-0">
         <div className="md:grid md:grid-cols-1 md:gap-6">

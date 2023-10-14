@@ -53,10 +53,10 @@ const AddCircuit = () => {
             mode: "cors",
             credentials: "include"
         }).then(res => {
-            console.log(res)
+            // console.log(res)
             return res.json()
         }).then(data => {
-            console.log(data)
+            // console.log(data)
             if ('error' in data) {
                 alert(data['error'])
             } else if ('msg' in data) {
@@ -71,7 +71,7 @@ const AddCircuit = () => {
             const formFile = document.getElementById('formFile')
             const formData = new FormData();
             formData.append('formFile', formFile.files[0]);
-            console.log(formFile.files.length)
+            // console.log(formFile.files.length)
             
             if (formFile.files.length > 0){
                 fetch(IP + '/upload', {
@@ -83,10 +83,10 @@ const AddCircuit = () => {
                     mode: "cors",
                     credentials: "include"
                 }).then(res => {
-                    console.log(res)
+                    // console.log(res)
                     return res.json()
                 }).then(data => {
-                    console.log(data)
+                    // console.log(data)
                     if ('error' in data) {
                         alert(data['error'])
                     } else {
@@ -114,7 +114,7 @@ const AddCircuit = () => {
                 // console.log(res)
                 return res.json()
             }).then(data => {
-                console.log(data)
+                // console.log(data)
                 setOptions(data)
             })
     }
@@ -208,10 +208,10 @@ const AddCircuit = () => {
         // <div className="h-screen flex items-center justify-center border">
         // <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-200">
         
-        <div className="border card-body">
+        <div className="card-body">
             <form onSubmit={(e) => {handleUpload(e)}}>
                 {/* Row 1 */}
-                <div className="border flex">
+                <div className="flex">
                     <div className="form-control flex-auto">
                         <label htmlFor="vendor" className="label">
                             <span className="label-text">Vendor</span>
@@ -270,7 +270,7 @@ const AddCircuit = () => {
 
                 {/* Row 2 - Display only if Vendor is set to 'DFA' */}
                 { (vendor === 'DFA') &&
-                <div className="border flex">
+                <div className="flex">
                     <div className="form-control flex-auto">
                         <label htmlFor="enni" className="label">
                             <span className="label-text">ENNI</span>
@@ -300,7 +300,7 @@ const AddCircuit = () => {
                 }
 
                 {/* Row 3 */}
-                <div className="border flex">
+                <div className="flex">
                     <div className="form-control flex-auto">
                         <label className="label">
                             <span className="label-text">Start Date</span>    
@@ -344,7 +344,7 @@ const AddCircuit = () => {
                 </div>
 
                 {/* Row 4 */}
-                <div className="border flex">
+                <div className="flex">
                     <div className="form-control flex-auto">
                         <label htmlFor="siteA" className="label">
                             <span className="label-text">Site A</span>
@@ -395,7 +395,7 @@ const AddCircuit = () => {
                 </div>
                 
                 {/* Row 5 */}
-                <div className="border form-control flex-auto">
+                <div className="form-control flex-auto">
                     <label className="label">
                         <span className="label-text">Additional Comments</span>    
                     </label>
@@ -420,7 +420,7 @@ const AddCircuit = () => {
                     <button className="btn btn-accent w-full max-w-xs" type='submit'>Save</button>
                 </div>
             </form>
-            <p>{vendor}</p>
+            {/* <p>{vendor}</p>
             <p>{circuitType}</p>
             <p>{speed}</p>
             <p>{circuitNumber}</p>
@@ -432,7 +432,7 @@ const AddCircuit = () => {
             <p>{siteA}</p>
             <p>{siteB}</p>
             <p>{comments}</p>
-            <p>{doc}</p>
+            <p>{doc}</p> */}
         </div>
      );
 }

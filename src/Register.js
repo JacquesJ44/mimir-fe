@@ -32,10 +32,10 @@ const Register = () => {
             credentials: 'include',
             body: JSON.stringify(form)
             }).then(res => {
-                console.log(res);
+                // console.log(res);
                 return res.json()
             }).then(data => {
-                console.log(data);
+                // console.log(data);
                 if ('error' in data) {
                     alert(data['error'])
                 } else {  
@@ -46,7 +46,7 @@ const Register = () => {
     }
 
     return ( 
-        <div className="h-screen flex items-center justify-center border">
+        <div className="h-screen flex items-center justify-center">
         <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-200">
             <div className="card-body">
                 <form onSubmit={handleSubmit}>

@@ -19,7 +19,7 @@ const UpdateCircuit = () => {
         }).then(res => {
             return res.json();
         }).then((data__) => {
-            console.log(data__);
+            // console.log(data__);
             setData(data__);
         });
     }, [id])
@@ -64,10 +64,10 @@ const UpdateCircuit = () => {
             credentials: "include"
         })
         .then(res => {
-            console.log(res)
+            // console.log(res)
             return res.json()
         }).then(data => {
-            console.log(data)
+            // console.log(data)
             if ('error' in data) {
                 alert(data['error'])
             } else if ('msg' in data) {
@@ -82,7 +82,7 @@ const UpdateCircuit = () => {
             const formFile = document.getElementById('formFile')
             const formData = new FormData();
             formData.append('formFile', formFile.files[0]);
-            console.log(formFile.files)
+            // console.log(formFile.files)
 
             if (formFile.files.length > 0 ){
                 fetch(IP + '/upload', {
@@ -94,10 +94,10 @@ const UpdateCircuit = () => {
                     mode: "cors",
                     credentials: "include"
                 }).then(res => {
-                    console.log(res)
+                    // console.log(res)
                     return res.json()
                 }).then(data => {
-                    console.log(data)
+                    // console.log(data)
                     if ('error' in data) {
                         alert(data['error'])
                     } else {
@@ -148,11 +148,11 @@ const UpdateCircuit = () => {
 
     return ( 
         <>
-        <div className="border card-body">
+        <div className="card-body">
             <form onSubmit={(e) => {handleUpload(e)}}>
-                <h1>{data.vendor} | {data.circuitType} | {data.circuitNumber}</h1>
+                <h1><strong>{data.vendor} | {data.circuitType} | {data.circuitNumber}</strong></h1>
                 {/* Row 1 */}
-                <div className="border flex">
+                <div className="flex">
                     <div className="form-control flex-auto">
                         <label htmlFor="speed" className="label">
                             <span className="label-text">Speed</span>
@@ -182,7 +182,7 @@ const UpdateCircuit = () => {
                 </div>
 
                 {/* Row 2 */}
-                <div className="border flex">
+                <div className="flex">
                     <div className="form-control flex-auto">
                         <label className="label">
                             <span className="label-text">Start Date</span>    
@@ -223,7 +223,7 @@ const UpdateCircuit = () => {
                 </div>
 
                 {/* Row 3 */}
-                <div className="border form-control flex-auto">
+                <div className="form-control flex-auto">
                     <label className="label">
                         <span className="label-text">Additional Comments</span>    
                     </label>
@@ -247,12 +247,12 @@ const UpdateCircuit = () => {
                     <button className="btn btn-accent w-full max-w-xs">Update</button>
                 </div>
             </form>
-            <p>{speed ? speed + 'new': data.speed + 'old'}</p>
+            {/* <p>{speed ? speed + 'new': data.speed + 'old'}</p>
             <p>{startDate ? startDate : data.startDate + 'old'}</p>
             <p>{contractTerm ? contractTerm : data.contractTerm + 'old'}</p>
             <p>{endDate ? endDate : data.endDate + 'old'}</p>
             <p>{comments ? comments : data.comments + 'old'}</p>
-            <p>{status ? status : data.status + 'old'}</p>
+            <p>{status ? status : data.status + 'old'}</p> */}
         </div>
     </>
      );

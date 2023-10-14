@@ -30,11 +30,11 @@ const Login = () => {
                 return res.json()
             }).then(data => {
                 if ('msg' in data) {
-                    console.log(data);
+                    // console.log(data);
                     alert(data['msg'])
                 } else {   
                     setUser(data);
-                    console.log(user)
+                    // console.log(user)
                     navigate('/circuits');
                 }
                 });
@@ -44,7 +44,7 @@ const Login = () => {
     }
 
     return (
-        <div className="h-screen flex items-center justify-center border">
+        <div className="h-screen flex items-center justify-center">
         <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-200">
             <div className="card-body">
                 <form onSubmit={handleSubmit}>

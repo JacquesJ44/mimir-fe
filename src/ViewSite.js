@@ -20,7 +20,7 @@ const ViewSite = () => {
           credentials: "include",
         }).then((data_) => {
           data_.json().then((data__) => {
-            console.log(data__);
+            // console.log(data__);
             setData(data__);
           });
         })
@@ -40,7 +40,7 @@ const ViewSite = () => {
         })
         .then((data_) => {
           data_.json().then((data__) => {
-            console.log(data__);
+            // console.log(data__);
             setData(data__);
             // navigate('/sites');
             // console.log('deleted');

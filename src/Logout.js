@@ -13,9 +13,9 @@ const Logout = () => {
             credentials: 'include',
         }).then(res => {
             setUser(null);
-            console.log(res.status);
+            // console.log(res.status);
             res.json().then(data => {
-            console.log(data)
+            // console.log(data)
         });
     })
     
