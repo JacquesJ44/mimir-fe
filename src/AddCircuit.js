@@ -71,33 +71,32 @@ const AddCircuit = () => {
             const formFile = document.getElementById('formFile')
             const formData = new FormData();
             formData.append('formFile', formFile.files[0]);
-            console.log(formFile.files)
-            fetch(IP + '/upload', {
-                method: 'POST',
-                // headers: { "Authorization": 'Basic',
-                //     "Content-Type": 'application/pdf',
-                //     "Access-Control-Allow-Origin": 'true'},
-                body: formData,
-                mode: "cors",
-                credentials: "include"
-            }).then(res => {
-                console.log(res)
-                return res.json()
-            }).then(data => {
-                console.log(data)
-                if ('error' in data) {
-                    alert(data['error'])
-                } else {
-                    handleSubmit(e)
-                }
-            })
+            console.log(formFile.files.length)
+            
+            if (formFile.files.length > 0){
+                fetch(IP + '/upload', {
+                    method: 'POST',
+                    // headers: { "Authorization": 'Basic',
+                    //     "Content-Type": 'application/pdf',
+                    //     "Access-Control-Allow-Origin": 'true'},
+                    body: formData,
+                    mode: "cors",
+                    credentials: "include"
+                }).then(res => {
+                    console.log(res)
+                    return res.json()
+                }).then(data => {
+                    console.log(data)
+                    if ('error' in data) {
+                        alert(data['error'])
+                    } else {
+                        handleSubmit(e)
+                    }
+                })
+            } else {
+                 handleSubmit(e)
+              }
     }
-    
-    //     function handleAll(handleUpload() handleSubmit()) {
-    //         handleUpload();
-    //         if ('err' in handleUpload())
-    //             handleSubmit();
-    // }
 
     // The following is for selecting a previously added site to a circuit. It is used for both SiteA and SiteB
     const [options, setOptions] = useState([]);

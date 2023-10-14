@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
 import { Link, useParams } from 'react-router-dom';
 import { IP } from './config.js';
+import ViewHandover from "./ViewHandover.js";
 // import ViewHandover from "./ViewHandover.js";
-import PdfViewerComponent from "./PDFViewerComponent.js";
+// import PdfViewerComponent from "./PDFViewerComponent.js";
 
 const ViewCircuit = () => {
 
     const [data, setData] = useState([])
-    const [file, setFile] = useState([])
+    const [file, setFile] = useState(false)
     const {id}  = useParams()
 
     useEffect(() => {
@@ -24,38 +25,41 @@ const ViewCircuit = () => {
           data_.json().then((data__) => {
             console.log(data__);
             setData(data__);
+            // console.log(data.doc);
           });
         })
     
       },[id])
 
-      const fetchFile = () => {
-        console.log('fetchFile')
-        fetch(IP + '/download/' + id, {
-          method: 'GET',
-          headers: { "Authorization": 'Basic',
-              "Content-Type": 'application/json',
-              "Access-Control-Allow-Origin": 'true'},
-          // body: formData,
-          mode: "cors",
-          credentials: "include"
-      }).then((data_) => {
-        data_.json().then((data__) => {
-          console.log(data__);
-          setFile(data__);
+      // const fetchFile = () => {
+      //   setFile(true)
+      //   console.log(file)
+      //   console.log('fetchFile')
+      //   fetch(IP + '/download/' + id, {
+      //     method: 'GET',
+      //     headers: { "Authorization": 'Basic',
+      //         "Content-Type": 'application/pdf',
+      //         "Access-Control-Allow-Origin": 'true'},
+      //     // body: formData,
+      //     mode: "cors",
+      //     credentials: "include"
+      // }).then((data_) => {
+      //   data_.blob().then((data__) => {
+      //     console.log(data__);
+      //     setFile(data__);
           
           // console.log()
-        });
-    })
-  }
+    //     });
+    // })
+  // }
 
     return ( 
         <>
         { file ? 
 
-      <div className="PDF-viewer">
-        <PdfViewerComponent document={data.doc} />
-      </div>
+
+        <ViewHandover element={data.doc}/>
+     
       :
       <div className="mt-10 sm:mt-0">
         <div className="md:grid md:grid-cols-1 md:gap-6">
@@ -82,7 +86,7 @@ const ViewCircuit = () => {
                     <strong>Comments:  </strong>{ data.comments }<br/>
                     <strong>Status:  </strong>{ data.status }<br/>
                     <strong>Document:
-                      <button onClick={fetchFile}>{data.doc}</button>   
+                      <button onClick={(e) => {setFile(true)}}>{data.doc}</button>   
                     {/* <a href={file} target="_blank" rel='noopener noreferrer' >{ data.doc }</a> */}
                     </strong>
                     <br/>
@@ -123,7 +127,7 @@ const ViewCircuit = () => {
           </div>
         </div>
       </div>
-    }
+  }
     </>
      );
 }
