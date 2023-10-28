@@ -100,7 +100,7 @@ const AddSite = () => {
                             />
                     </div>
 
-                    <div className="form-contro flex-auto">
+                    <div className="form-control flex-auto">
                         <label className="label">
                             <span className="label-text">Longitude</span>    
                         </label>

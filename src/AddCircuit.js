@@ -201,6 +201,7 @@ const AddCircuit = () => {
     const ennis = [
         {label: "ENI21-0000123", value: "ENI21-0000123"},
         {label: "ENI11-0001059", value: "ENI11-0001059"},
+        {label: "ENI11-0001107", value: "ENI11-0001107"},
         {label: "GNI21-0000071", value: "GNI21-0000071"},
     ]
 
