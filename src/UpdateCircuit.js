@@ -26,6 +26,7 @@ const UpdateCircuit = () => {
     
     // Main form data variables
     const [speed, setSpeed] = useState(data.speed);
+    const [vlan, setVlan] = useState(data.vlan);
     const [startDate, setStartDate] = useState(data.startDate);
     const [contractTerm, setContractTerm] = useState(data.contractTerm);
     const [endDate, setEndDate] = useState(data.endDate);
@@ -47,6 +48,7 @@ const UpdateCircuit = () => {
         const form = {
             id: id,
             speed: speed,
+            vlan: vlan,
             startDate: startDate,
             contractTerm: contractTerm,
             endDate: endDate,
@@ -166,6 +168,19 @@ const UpdateCircuit = () => {
                                 })}
                         </select>
                     </div>
+
+                    <div className="form-control flex-auto">
+                        <label className="label">
+                            <span className="label-text">VLAN ID</span>    
+                        </label>
+                        <input className="input input-bordered w-full max-w-xs"
+                            type="text"
+                            placeholder="VLAN ID"
+                            value = { vlan }
+                            onChange={(e) => setVlan(e.target.value)} 
+                        />
+                    </div>
+
                     <div className="form-control flex-auto">
                         <label htmlFor="vendor" className="label">
                             <span className="label-text">Status</span>
