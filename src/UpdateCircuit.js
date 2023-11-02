@@ -26,6 +26,7 @@ const UpdateCircuit = () => {
     
     // Main form data variables
     const [speed, setSpeed] = useState(data.speed);
+    const [enni, setEnni] = useState(data.enni);
     const [vlan, setVlan] = useState(data.vlan);
     const [startDate, setStartDate] = useState(data.startDate);
     const [contractTerm, setContractTerm] = useState(data.contractTerm);
@@ -48,6 +49,7 @@ const UpdateCircuit = () => {
         const form = {
             id: id,
             speed: speed,
+            enni: enni,
             vlan: vlan,
             startDate: startDate,
             contractTerm: contractTerm,
@@ -148,6 +150,13 @@ const UpdateCircuit = () => {
         {label: "60 Months", value: "60"},
     ]
 
+    const ennis = [
+        {label: "ENI21-0000123", value: "ENI21-0000123"},
+        {label: "ENI11-0001059", value: "ENI11-0001059"},
+        {label: "ENI11-0001107", value: "ENI11-0001107"},
+        {label: "GNI21-0000071", value: "GNI21-0000071"},
+    ]
+
     return ( 
         <>
         <div className="card-body">
@@ -164,6 +173,20 @@ const UpdateCircuit = () => {
                                 {speeds.map((s, index) => {
                                     return (
                                         <option key={index} value={s.value}>{s.label}</option>
+                                    )
+                                })}
+                        </select>
+                    </div>
+                    
+                    <div className="form-control flex-auto">
+                        <label htmlFor="enni" className="label">
+                            <span className="label-text">ENNI</span>
+                        </label>
+                        <select onChange={(e) => setEnni(e.target.value)} id="enni" className="input input-bordered w-full max-w-xs" defaultValue={enni ? enni : data.enni}>
+                        <option value={enni ? enni : data.enni}>Choose an option...</option>
+                                {ennis.map((e, index) => {
+                                    return (
+                                        <option key={index} value={e.value}>{e.label}</option>
                                     )
                                 })}
                         </select>
