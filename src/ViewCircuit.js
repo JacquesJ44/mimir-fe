@@ -38,7 +38,7 @@ const ViewCircuit = () => {
       <div className="mt-10 sm:mt-0">
         <div className="md:grid md:grid-cols-1 md:gap-6">
           <div className="mt-5 md:mt-0 md:col-span-1">
-            <div className="bg-black shadow px-4 py-5 sm:rounded-lg sm:p-6">
+            <div className=" shadow px-4 py-5 sm:rounded-lg sm:p-6">
 
               <div className="md:grid md:grid-cols-3 md:gap-6 py-3">
                 <div className="md:col-span-1 text-left">
