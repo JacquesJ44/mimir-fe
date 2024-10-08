@@ -24,6 +24,7 @@ const Navbar = () => {
             <ul className="menu menu-horizontal px-1">
               <li className="mx-2"><Link to="/circuits">Circuits</Link></li>
               <li className="mx-2"><Link to="/sites">Sites</Link></li>
+              <li className="mx-2"><Link to="/register">Register New User</Link></li>
               <li className="mx-2"><Link to="/logout">Logout</Link></li>
             </ul>
           </div> 

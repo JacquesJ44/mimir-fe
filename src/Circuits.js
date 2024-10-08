@@ -1,7 +1,8 @@
-import { useState } from "react";
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from "react";
+import { Link, useParams } from 'react-router-dom';
 import { IP } from './config.js';
 import moments from "moment";
+
 
 const Circuits = () => {
     const [vendor, setVendor] = useState('');
@@ -11,14 +12,36 @@ const Circuits = () => {
     const [siteA, setSiteA] = useState('');
     const [siteB, setSiteB] = useState('');
     const [status, setStatus] = useState('');
-
+    
     const contract_status = ['Active', 'Cancelled'
         // { 
-        //     status: ['active', '<3 months', 'out of contract', 'cancelled'],
-        //     colour: ['green', 'orange', 'red', 'purple']
-               
-        // }
-    ]
+            //     status: ['active', '<3 months', 'out of contract', 'cancelled'],
+            //     colour: ['green', 'orange', 'red', 'purple']
+            
+            // }
+        ]
+        
+    const {id}  = useParams()
+    
+    // useEffect(() => {
+    //     window.scrollTo(0,0)
+    
+    //     fetch(IP + '/circuits/' + id, {
+    //       method: 'GET',
+    //       headers: { "Authorization": 'Basic',
+    //                 "Content-Type": 'application/json',
+    //                 "Access-Control-Allow-Origin": 'true'},
+    //       mode: "cors",
+    //       credentials: "include",
+    //     }).then((data_) => {
+    //       data_.json().then((data__) => {
+    //         // console.log(data__);
+    //         setData(data__);
+    //         // console.log(data.doc);
+    //       });
+    //     })
+    
+    //   },[id])
 
     const [data, setData] = useState([])
     const handleSubmit = (e) => {

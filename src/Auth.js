@@ -11,7 +11,7 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     
     useEffect(() => {
-        fetch(IP + '/circuits', {
+        fetch(IP + '/navbar', {
             method: 'GET',
             // headers: {'Authorization': 'Basic',
             //           'Content-Type': 'application/json',

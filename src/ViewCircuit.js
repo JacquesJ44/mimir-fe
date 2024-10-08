@@ -60,7 +60,7 @@ const ViewCircuit = () => {
                     <strong>Comments:  </strong>{ data.comments }<br/>
                     <strong>Status:  </strong>{ data.status }<br/>
                     <strong>Document:
-                      <button onClick={(e) => {setFile(true)}}>{data.doc}</button>   
+                      <button onClick={(e) => {setFile(true)}}>{ data.doc }</button>   
                     {/* <a href={file} target="_blank" rel='noopener noreferrer' >{ data.doc }</a> */}
                     </strong>
                     <br/>

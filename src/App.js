@@ -34,11 +34,11 @@ function App() {
                 <Route path='/viewcircuit/:id' element={<ViewCircuit />} />
                 <Route path='/updatecircuit/:id' element={<UpdateCircuit />} />
                 <Route path='/addcircuit' element={<AddCircuit />} />
+                <Route path='/register' element={<Register />} />
               </Route>
               
               <Route path='/' element={<Login />} />
               <Route path='/logout' element={<Logout />} />
-              <Route path='/register' element={<Register />} />
             </Routes>
           </div> 
         </div>
