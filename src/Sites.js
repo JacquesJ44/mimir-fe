@@ -54,7 +54,7 @@ const Sites = () => {
         
         <div className="card-body">
         <div className="flex justify-end max-w">
-            <Link to='/addsite' className="btn btn-accent">Add Site</Link>
+            <Link to='/sites/addsite' className="btn btn-accent">Add Site</Link>
         </div>
         
         <form onSubmit={handleSubmit}>
@@ -234,7 +234,7 @@ const Sites = () => {
                             <td className="border border-slate-700">{site.postcode}</td> 
                             <td className="border border-slate-700">{site.province}</td>
                             <td>
-                                <Link to={'/viewsite/' + site.site} className="btn btn-accent">View</Link>
+                                <Link to={'/sites/viewsite/' + site.site} className="btn btn-accent">View</Link>
                                 {/* <button className="btn btn-accent w-full max-w-xs">View</button>  */}
                             </td>    
                         </tr>

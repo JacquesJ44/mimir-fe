@@ -9,7 +9,7 @@ const UpdateCircuit = () => {
     const [data, setData] = useState([])
     useEffect(() => {
         
-        fetch(IP + "/viewcircuit/" + id, {
+        fetch(IP + "/circuits/updatecircuit/" + id, {
             method: 'GET',
             headers: { "Authorization": 'Basic',
             "Content-Type": 'application/json',
@@ -31,11 +31,12 @@ const UpdateCircuit = () => {
     const [startDate, setStartDate] = useState(data.startDate);
     const [contractTerm, setContractTerm] = useState(data.contractTerm);
     const [endDate, setEndDate] = useState(data.endDate);
+    const [mrc, setMrc] = useState(data.mrc);
     const [comments, setComments] = useState(data.comments);
     const [status, setStatus] = useState(data.status);
-    const [doc, setDoc] = useState('');
+    const [doc, setDoc] = useState(data.doc);
 
-    const contract_status = ['Active', 'Cancelled'];
+    const contract_status = ['Active', 'Cancelled', 'Cancelling'];
     
     let navigate = useNavigate();
 
@@ -54,11 +55,12 @@ const UpdateCircuit = () => {
             startDate: startDate,
             contractTerm: contractTerm,
             endDate: endDate,
+            mrc: mrc,
             comments: comments,
             status: status,
             doc: doc
         };
-        fetch(IP + '/updatecircuit/' + id, {
+        fetch(IP + '/circuits/updatecircuit/' + id, {
             method: 'POST',
             headers: { "Authorization": 'Basic',
                 "Content-Type": 'application/json',
@@ -130,16 +132,20 @@ const UpdateCircuit = () => {
     const speeds = [
         {label: "10Mbps", value: "10Mbps"},
         {label: "20Mbps", value: "20Mbps"},
+        {label: "25Mbps", value: "25Mbps"},
+        {label: "30Mbps", value: "30Mbps"},
         {label: "50Mbps", value: "50Mbps"},
         {label: "100Mbps", value: "100Mbps"},
         {label: "200Mbps", value: "200Mbps"},
         {label: "300Mbps", value: "300Mbps"},
+        {label: "400Mbps", value: "400Mbps"},
         {label: "500Mbps", value: "500Mbps"},
         {label: "800Mbps", value: "800Mbps"},
         {label: "1Gbps", value: "1Gbps"},
         {label: "2Gbps", value: "2Gbps"},
         {label: "3Gbps", value: "3Gbps"},
         {label: "5Gbps", value: "5Gbps"},
+        {label: "7Gbps", value: "7Gbps"},
         {label: "10Gbps", value: "10Gbps"},
     ]
 
@@ -151,9 +157,11 @@ const UpdateCircuit = () => {
     ]
 
     const ennis = [
-        {label: "ENI21-0000123", value: "ENI21-0000123"},
         {label: "ENI11-0001059", value: "ENI11-0001059"},
         {label: "ENI11-0001107", value: "ENI11-0001107"},
+        {label: "ENI11-0001122", value: "ENI11-0001122"},
+        {label: "ENI21-0000123", value: "ENI21-0000123"},
+        {label: "ENI21-0006085", value: "ENI21-0006085"},
         {label: "GNI21-0000071", value: "GNI21-0000071"},
     ]
 
@@ -177,13 +185,30 @@ const UpdateCircuit = () => {
                                 })}
                         </select>
                     </div>
-                    
+
+                    <div className="form-control flex-auto">
+                        <label htmlFor="status" className="label">
+                            <span className="label-text">Status</span>
+                        </label>
+                        <select onChange={(e) => {setStatus(e.target.value)}} id="status" className="input input-bordered w-full max-w-xs" defaultValue={status ? status : data.status}>
+                            <option value={status ? status : data.status}>{data.status}</option>
+                                {contract_status.map((c, index) => {
+                                    return (
+                                        <option key={index} value={c}>{c}</option>
+                                    )
+                                })}
+                        </select>
+                    </div>
+
+                {/* Display only if Vendor is set to 'DFA' */}
+                { (data.vendor === 'DFA') &&
+                <>
                     <div className="form-control flex-auto">
                         <label htmlFor="enni" className="label">
                             <span className="label-text">ENNI</span>
                         </label>
                         <select onChange={(e) => setEnni(e.target.value)} id="enni" className="input input-bordered w-full max-w-xs" defaultValue={enni ? enni : data.enni}>
-                        <option value={enni ? enni : data.enni}>Choose an option...</option>
+                        <option value={enni ? enni : data.enni}>{ data.enni }</option>
                                 {ennis.map((e, index) => {
                                     return (
                                         <option key={index} value={e.value}>{e.label}</option>
@@ -198,27 +223,14 @@ const UpdateCircuit = () => {
                         </label>
                         <input className="input input-bordered w-full max-w-xs"
                             type="text"
-                            placeholder="VLAN ID"
+                            placeholder={ data.vlan }
                             value = { vlan }
                             onChange={(e) => setVlan(e.target.value)} 
                         />
                     </div>
-
-                    <div className="form-control flex-auto">
-                        <label htmlFor="vendor" className="label">
-                            <span className="label-text">Status</span>
-                        </label>
-                        <select onChange={(e) => {setStatus(e.target.value)}} id="status" className="input input-bordered w-full max-w-xs" defaultValue={status ? status : data.status}>
-                            <option value={status ? status : data.status}>{data.status}</option>
-                                {contract_status.map((c, index) => {
-                                    return (
-                                        <option key={index} value={c}>{c}</option>
-                                    )
-                                })}
-                        </select>
-                    </div>
+                </>
+            }
                 </div>
-
                 {/* Row 2 */}
                 <div className="flex">
                     <div className="form-control flex-auto">
@@ -235,7 +247,7 @@ const UpdateCircuit = () => {
                     </div>
 
                     <div className="form-control flex-auto">
-                        <label htmlFor="contractterm" className="label">
+                        <label className="label">
                             <span className="label-text">Contract Term</span>
                         </label>
                         <select onChange={(e) => {lastDay(e.target.value)}} id="contractterm" className="input input-bordered w-full max-w-xs" defaultValue={contractTerm ? contractTerm : data.contractTerm}>
@@ -258,6 +270,18 @@ const UpdateCircuit = () => {
                             defaultValue={endDate ? endDate : data.endDate}
                         />
                     </div>
+
+                    <div className="form-control flex-auto">
+                        <label className="label">
+                            <span className="label-text">Monthly Recurring Cost (ex VAT)</span>    
+                        </label>
+                        <input className="input input-bordered w-full max-w-xs"
+                            type="text"
+                            placeholder={ data.mrc }
+                            value = { mrc }
+                            onChange={(e) => setMrc(e.target.value)}
+                        />
+                    </div>
                 </div>
 
                 {/* Row 3 */}
@@ -277,8 +301,12 @@ const UpdateCircuit = () => {
                     <input
                         className="relative m-0 block w-full min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-clip-padding px-3 py-[0.32rem] text-base font-normal text-neutral-700 transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:overflow-hidden file:rounded-none file:border-0 file:border-solid file:border-inherit file:bg-neutral-100 file:px-3 file:py-[0.32rem] file:text-neutral-700 file:transition file:duration-150 file:ease-in-out file:[border-inline-end-width:1px] file:[margin-inline-end:0.75rem] hover:file:bg-neutral-200 focus:border-primary focus:text-neutral-700 focus:shadow-te-primary focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:file:bg-neutral-700 dark:file:text-neutral-100 dark:focus:border-primary"
                         type="file"
-                        id="formFile" 
+                        id="formFile"
+                        defaultValue = {doc ? doc : data.doc} 
                         onChange={(e) => setDoc(e.target.value)}/>
+                        <p> 
+                         <span className="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">Current doc: { data.doc }</span>
+                        </p>
                 </div>
                 
                 <div className="form-control mt-2">
