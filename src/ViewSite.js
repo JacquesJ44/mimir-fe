@@ -11,7 +11,7 @@ const ViewSite = () => {
     useEffect(() => {
         window.scrollTo(0,0)
     
-        fetch(IP + '/viewsite/' + site, {
+        fetch(IP + '/sites/viewsite/' + site, {
           method: 'GET',
           headers: { "Authorization": 'Basic',
                     "Content-Type": 'application/json',
@@ -29,7 +29,7 @@ const ViewSite = () => {
 
       const handleClick = (e) => {
         e.preventDefault();
-        fetch(IP + '/viewsite/' + site, {
+        fetch(IP + '/sites/viewsite/' + site, {
           method: 'POST',
           headers: { "Authorization": 'Basic',
                     "Content-Type": 'application/json',

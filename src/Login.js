@@ -26,7 +26,7 @@ const Login = () => {
             credentials: 'include',
             body: JSON.stringify(user)
             }).then(res => {
-                // console.log(res.json());
+                // console.log(res);
                 return res.json()
             }).then(data => {
                 if ('msg' in data) {

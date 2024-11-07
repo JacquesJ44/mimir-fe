@@ -13,13 +13,7 @@ const Circuits = () => {
     const [siteB, setSiteB] = useState('');
     const [status, setStatus] = useState('');
     
-    const contract_status = ['Active', 'Cancelled'
-        // { 
-            //     status: ['active', '<3 months', 'out of contract', 'cancelled'],
-            //     colour: ['green', 'orange', 'red', 'purple']
-            
-            // }
-        ]
+    const contract_status = ['Active', 'Cancelled', 'Cancelling']
         
     const {id}  = useParams()
     
@@ -85,7 +79,7 @@ const Circuits = () => {
         
             <div className="card-body">
                 <div className="flex justify-end max-w">
-                    <Link to='/addcircuit' className="btn btn-accent">Add Circuit</Link>
+                    <Link to='/circuits/addcircuit' className="btn btn-accent">Add Circuit</Link>
                 </div>
 
                 <form onSubmit={handleSubmit}>
@@ -232,13 +226,28 @@ const Circuits = () => {
                 <tbody>
                     {data && data.map((c) => (
                         <tr key={c.id}>
-                            {c.status === 'Cancelled' ?
-                            <td className="border border-slate-700 bg-purple-500 w-5"></td>
-                            :
-                                today.format('YYYY-MM-DD') < c.endDate ?
-                                <td className="border border-slate-700 bg-green-500 w-5" ></td>
-                                :
-                                <td className="border border-slate-700 bg-red-500 w-5"></td>}
+                            <td className="border border-slate-700"
+                                style={{
+                                    backgroundColor:
+                                    c.status === 'Cancelled'
+                                        ? 'purple'
+                                        : c.status === 'Cancelling'
+                                        ? 'yellow'
+                                        : today.isBefore(c.endDate)
+                                        ? 'green'
+                                        : 'red',
+                                }}
+                                title={
+                                    c.status === 'Cancelled'
+                                      ? 'This item has been cancelled'
+                                      : c.status === 'Cancelling'
+                                      ? 'This item is in the process of being cancelled'
+                                      : today.isBefore(c.endDate)
+                                      ? 'This item is active and still in contract'
+                                      : 'This item is active but out of contract'
+                                  }
+                                >
+                            </td>
                             {/* <td className="border border-slate-700 bg-orange-500 w-5"></td>  */}
                             <td className="border border-slate-700">{c.vendor}</td> 
                             <td className="border border-slate-700">{c.circuitType}</td> 
@@ -252,7 +261,7 @@ const Circuits = () => {
                             <td className="border border-slate-700">{c.postcode}</td> 
                             <td className="border border-slate-700">{c.province}</td> */}
                             <td>
-                                <Link to={'/viewcircuit/' + c.id} className="btn btn-accent">View</Link>
+                                <Link to={'/circuits/viewcircuit/' + c.id} className="btn btn-accent">View</Link>
                                 {/* <button className="btn btn-accent w-full max-w-xs">View</button>  */}
                             </td>    
                         </tr>

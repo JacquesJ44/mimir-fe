@@ -15,9 +15,7 @@ const Navbar = () => {
         <div className="navbar shadow-2xl bg-base-200 roundedborders">
         <div className="flex-1">
           <h1>Mímir</h1>
-          {/* <Link to="/"> */}
             <img src={ logo } className="App-logo" alt="logo" />
-          {/* </Link> */}
         </div>
         {user && 'id' in user ?
           <div className="flex-none">

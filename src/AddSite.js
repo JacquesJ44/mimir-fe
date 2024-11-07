@@ -31,7 +31,7 @@ const AddSite = () => {
             post: post,
             province: province
         };
-        fetch(IP + '/addsite', {
+        fetch(IP + '/sites/addsite', {
             method: 'POST',
             headers: { "Authorization": 'Basic',
                 "Content-Type": 'application/json',

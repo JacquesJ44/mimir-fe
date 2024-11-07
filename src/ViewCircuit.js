@@ -14,7 +14,7 @@ const ViewCircuit = () => {
     useEffect(() => {
         window.scrollTo(0,0)
     
-        fetch(IP + '/viewcircuit/' + id, {
+        fetch(IP + '/circuits/viewcircuit/' + id, {
           method: 'GET',
           headers: { "Authorization": 'Basic',
                     "Content-Type": 'application/json',
@@ -57,6 +57,7 @@ const ViewCircuit = () => {
                     <strong>Contract End: </strong>{ data.endDate }<br/>
                     <strong>Site A:  </strong>{ data.siteA }<br/>
                     <strong>Site B:  </strong>{ data.siteB }<br/>
+                    <strong>MRC:  </strong>{ data.mrc }<br/>
                     <strong>Comments:  </strong>{ data.comments }<br/>
                     <strong>Status:  </strong>{ data.status }<br/>
                     <strong>Document:
@@ -71,7 +72,7 @@ const ViewCircuit = () => {
               <hr/>
 
               <div className="px-4 py-3 bg-black-50 text-right sm:px-6 flex justify-between">
-                <Link to={"/updatecircuit/" + id}>
+                <Link to={"/circuits/updatecircuit/" + id}>
                   <button 
                     // type="submit"
                     // value="Delete"

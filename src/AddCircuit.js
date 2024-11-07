@@ -15,6 +15,7 @@ const AddCircuit = () => {
     const [startDate, setStartDate] = useState('');
     const [contractTerm, setContractTerm] = useState('');
     const [endDate, setEndDate] = useState('');
+    const [mrc, setMrc] = useState('');
     const [siteA, setSiteA] = useState('');
     const [siteB, setSiteB] = useState('');
     const [comments, setComments] = useState('');
@@ -39,12 +40,13 @@ const AddCircuit = () => {
             startDate: startDate,
             contractTerm: contractTerm,
             endDate: endDate,
+            mrc: mrc,
             siteA: siteA,
             siteB: siteB,
             comments: comments,
             doc: doc
         };
-        fetch(IP + '/addcircuit', {
+        fetch(IP + '/circuits/addcircuit', {
             method: 'POST',
             headers: { "Authorization": 'Basic',
                 "Content-Type": 'application/json',
@@ -53,7 +55,7 @@ const AddCircuit = () => {
             mode: "cors",
             credentials: "include"
         }).then(res => {
-            // console.log(res)
+            // console.log(res.text)
             return res.json()
         }).then(data => {
             // console.log(data)
@@ -72,6 +74,7 @@ const AddCircuit = () => {
             const formData = new FormData();
             formData.append('formFile', formFile.files[0]);
             // console.log(formFile.files.length)
+            // console.log(formFile.files)
             
             if (formFile.files.length > 0){
                 fetch(IP + '/upload', {
@@ -98,7 +101,7 @@ const AddCircuit = () => {
               }
     }
 
-    // The following is for selecting a previously added site to a circuit. It is used for both SiteA and SiteB
+    // The following is for selecting an existing site added site to a circuit. It is used for both SiteA and SiteB
     const [options, setOptions] = useState([]);
 
     const fetchData = (value) =>{
@@ -138,17 +141,13 @@ const AddCircuit = () => {
         },
         {
             vendor: 'Seacom',
-            type: ['FTTB', 'FTTH']
+            type: ['EIA', 'FTTB']
         },
         {
             vendor: 'Comsol',
-            type: ['CX Broadband (PtMP)', 'CX Plus Broadband (PTP)']
+            type: ['CX Broadband (PtMP)', 'CX Plus Broadband (PTP)', 'CX Broadband Lite']
             
         },
-        {
-            vendor: 'Frogfoot',
-            type: ['FTTB', 'FTTH']
-        }
     ]
 
     const [circuitTypes, setCircuitTypes] = useState([])
@@ -178,16 +177,20 @@ const AddCircuit = () => {
     const speeds = [
         {label: "10Mbps", value: "10Mbps"},
         {label: "20Mbps", value: "20Mbps"},
+        {label: "25Mbps", value: "25Mbps"},
+        {label: "30Mbps", value: "30Mbps"},
         {label: "50Mbps", value: "50Mbps"},
         {label: "100Mbps", value: "100Mbps"},
         {label: "200Mbps", value: "200Mbps"},
         {label: "300Mbps", value: "300Mbps"},
+        {label: "400Mbps", value: "400Mbps"},
         {label: "500Mbps", value: "500Mbps"},
         {label: "800Mbps", value: "800Mbps"},
         {label: "1Gbps", value: "1Gbps"},
         {label: "2Gbps", value: "2Gbps"},
         {label: "3Gbps", value: "3Gbps"},
         {label: "5Gbps", value: "5Gbps"},
+        {label: "7Gbps", value: "7Gbps"},
         {label: "10Gbps", value: "10Gbps"},
     ]
 
@@ -199,9 +202,11 @@ const AddCircuit = () => {
     ]
 
     const ennis = [
-        {label: "ENI21-0000123", value: "ENI21-0000123"},
         {label: "ENI11-0001059", value: "ENI11-0001059"},
         {label: "ENI11-0001107", value: "ENI11-0001107"},
+        {label: "ENI11-0001122", value: "ENI11-0001122"},
+        {label: "ENI21-0000123", value: "ENI21-0000123"},
+        {label: "ENI21-0006085", value: "ENI21-0006085"},
         {label: "GNI21-0000071", value: "GNI21-0000071"},
     ]
 
@@ -340,6 +345,19 @@ const AddCircuit = () => {
                             readOnly
                             // onChange={(e) => setEndDate(e.target.value)} 
                             value = { endDate }
+                        />
+                    </div>
+
+                    <div className="form-control flex-auto">
+                        <label className="label">
+                            <span className="label-text">Monthly Recurring Cost (ex VAT)</span>    
+                        </label>
+                        <input className="input input-bordered w-full max-w-xs"
+                            type="text" 
+                            placeholder="R"
+                            required
+                            value = { mrc }
+                            onChange={(e) => setMrc(e.target.value)} 
                         />
                     </div>
                 </div>

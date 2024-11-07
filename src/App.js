@@ -28,12 +28,12 @@ function App() {
             <Routes>
               <Route element={<RequireAuth />}>
                 <Route path='/sites' element={<Sites />} />
-                <Route path='/addsite' element={<AddSite />} />
-                <Route path='/viewsite/:site' element={<ViewSite />} />
+                <Route path='/sites/addsite' element={<AddSite />} />
+                <Route path='/sites/viewsite/:site' element={<ViewSite />} />
                 <Route path='/circuits' element={<Circuits />} />
-                <Route path='/viewcircuit/:id' element={<ViewCircuit />} />
-                <Route path='/updatecircuit/:id' element={<UpdateCircuit />} />
-                <Route path='/addcircuit' element={<AddCircuit />} />
+                <Route path='/circuits/viewcircuit/:id' element={<ViewCircuit />} />
+                <Route path='/circuits/updatecircuit/:id' element={<UpdateCircuit />} />
+                <Route path='/circuits/addcircuit' element={<AddCircuit />} />
                 <Route path='/register' element={<Register />} />
               </Route>
               
