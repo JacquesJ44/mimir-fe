@@ -439,19 +439,6 @@ const AddCircuit = () => {
                     <button className="btn btn-accent w-full max-w-xs" type='submit'>Save</button>
                 </div>
             </form>
-            {/* <p>{vendor}</p>
-            <p>{circuitType}</p>
-            <p>{speed}</p>
-            <p>{circuitNumber}</p>
-            <p>{enni}</p>
-            <p>{vlan}</p>
-            <p>{startDate}</p>
-            <p>{contractTerm}</p>
-            <p>{endDate}</p>
-            <p>{siteA}</p>
-            <p>{siteB}</p>
-            <p>{comments}</p>
-            <p>{doc}</p> */}
         </div>
      );
 }

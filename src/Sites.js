@@ -48,10 +48,7 @@ const Sites = () => {
     }
 
     return ( 
-<>
-        {/* // <div className="h-screen flex items-center justify-center border">
-        // <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-200"> */}
-        
+    <>
         <div className="card-body">
         <div className="flex justify-end max-w">
             <Link to='/sites/addsite' className="btn btn-accent">Add Site</Link>
@@ -98,19 +95,6 @@ const Sites = () => {
                 />
             </div>
 
-            {/* <div className="form-control mx-1">
-                <label className="label">
-                    <span className="label-text">Building Name</span>    
-                </label>
-                <input className="input input-bordered w-full max-w-xs"
-                    type="text" 
-                    placeholder="Building Name"
-                    required
-                    value = { building }
-                    onChange={(e) => setBuilding(e.target.value)} 
-                />
-            </div> */}
-
             <div className="form-control mx-1">
                 <label className="label">
                     <span className="label-text">Street</span>    
@@ -123,19 +107,6 @@ const Sites = () => {
                     onChange={(e) => setStreet(e.target.value)} 
                 />
             </div>
-
-            {/* <div className="form-control mx-1">
-                <label className="label">
-                    <span className="label-text">Building Number</span>    
-                </label>
-                <input className="input input-bordered w-full max-w-xs"
-                    type="date" 
-                    placeholder="Building Number"
-                    required
-                    value = { number }
-                    onChange={(e) => setNumber(e.target.value)} 
-                />
-            </div> */}
 
             <div className="form-control mx-1">
                 <label className="label">
@@ -163,19 +134,6 @@ const Sites = () => {
                 />
             </div>
 
-            {/* <div className="form-control mx-1">
-                <label className="label">
-                    <span className="label-text">Postal Code</span>    
-                </label>
-                <input className="input input-bordered w-full max-w-xs"
-                    type="text" 
-                    placeholder="Postal Code"
-                    required
-                    value = { post }
-                    onChange={(e) => setPost(e.target.value)} 
-                />
-            </div> */}
-
             <div className="form-control mx-1">
                 <label className="label">
                     <span className="label-text">Province</span>    
@@ -198,28 +156,6 @@ const Sites = () => {
 
         <div className="flex font-sans">
             <table className="flex-auto table-auto border-collapse my-10">
-                {/* <thead>
-                    <tr>
-                    <th className="border border-slate-600">ID</th>
-                    <th className="border border-slate-600">Type A</th>
-                    <th className="border border-slate-600">Type B</th>
-                    <th className="border border-slate-600">Deliver again from</th>
-                    <th className="border border-slate-600">Start from</th>
-                    <th className="border border-slate-600">Name</th>
-                    <th className="border border-slate-600">Surname</th>
-                    <th className="border border-slate-600">Email</th>
-                    <th className="border border-slate-600">Send notification</th>
-                    <th className="border border-slate-600">Forward Parcels</th>
-                    <th className="border border-slate-600">Infopost</th>
-                    <th className="border border-slate-600">Additional Contacts</th>
-                    <th className="border border-slate-600">From Address</th>
-                    <th className="border border-slate-600">To Address</th>
-                    <th className="border border-slate-600">Date Created</th>
-                    <th className="border border-slate-600">Paid</th>
-                    <th className="border border-slate-600">Term (Months)</th>
-                    <th className="border border-slate-600">Status</th>
-                    </tr>
-                </thead> */}
                 <tbody>
                     {data && data.map((site) => (
                         <tr key={site.site}>
@@ -241,11 +177,9 @@ const Sites = () => {
                     ))}
                 </tbody>
             </table>
+            </div>
         </div>
-        </div>
-        {/* // </div> */}
-        {/* // </div> */}
-</>
+    </>
      );
 }
  
