@@ -93,9 +93,6 @@ const UpdateCircuit = () => {
             if (formFile.files.length > 0 ){
                 fetch(IP + '/upload', {
                     method: 'POST',
-                    // headers: { "Authorization": 'Basic',
-                    //     "Content-Type": 'application/pdf',
-                    //     "Access-Control-Allow-Origin": 'true'},
                     body: formData,
                     mode: "cors",
                     credentials: "include"
@@ -313,12 +310,6 @@ const UpdateCircuit = () => {
                     <button className="btn btn-accent w-full max-w-xs">Update</button>
                 </div>
             </form>
-            {/* <p>{speed ? speed + 'new': data.speed + 'old'}</p>
-            <p>{startDate ? startDate : data.startDate + 'old'}</p>
-            <p>{contractTerm ? contractTerm : data.contractTerm + 'old'}</p>
-            <p>{endDate ? endDate : data.endDate + 'old'}</p>
-            <p>{comments ? comments : data.comments + 'old'}</p>
-            <p>{status ? status : data.status + 'old'}</p> */}
         </div>
     </>
      );

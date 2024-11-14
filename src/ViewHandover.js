@@ -4,16 +4,8 @@ import { useParams } from 'react-router-dom';
 import { Document, Page, pdfjs} from 'react-pdf';
 import 'react-pdf/dist/Page/AnnotationLayer.css';
 import 'react-pdf/dist/Page/TextLayer.css';
-// import path from 'node:path';
-// import fs from 'node:fs';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
-
-// pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-    //     // 'pdfjs-dist/build/pdf.worker.min.js',
-    //     'npm:pdfjs-dist/build/pdf.worker.min.js',
-    //     import.meta.url,
-    //   ).toString();
     
     const ViewHandover = () => {
         
@@ -39,21 +31,14 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/b
           function nextPage() {
             changePage(1);
           }
-
-        // function onDocumentLoadSuccess({ numPages }: { numPages: number }): void {
-        //     setNumPages(numPages);
-        //   }
         
         useEffect(() => {
         
-    // const fetchFile = () => {
-        // console.log('fetchFile')
         fetch(IP + '/download/' + id, {
           method: 'GET',
           headers: { "Authorization": 'Basic',
               "Content-Type": 'application/pdf',
               "Access-Control-Allow-Origin": 'true'},
-          // body: formData,
           mode: "cors",
           credentials: "include"
       }).then((data_) => {
@@ -63,7 +48,6 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/b
         //   console.log(file)
         });
     })
-    // }
 }, [id])
 
     return ( 

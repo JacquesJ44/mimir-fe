@@ -66,10 +66,7 @@ const AddSite = () => {
         {label: "Western Cape", value: "Western Cape"},
     ]
 
-    return (  
-        // <div className="h-screen flex items-center justify-center border">
-        // <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-200">
-        
+    return (          
         <div className="card-body">
             <form onSubmit={handleSubmit}>
                 {/* Row 1 */}
@@ -216,8 +213,6 @@ const AddSite = () => {
                 </div>
             </form>
         </div>
-        // </div>
-        // </div>
     );
 }
  

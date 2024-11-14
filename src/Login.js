@@ -38,9 +38,6 @@ const Login = () => {
                     navigate('/circuits');
                 }
                 });
-            // }).catch ((error) => {
-            //     alert('Incorrect username or password', error);
-            // });
     }
 
     return (

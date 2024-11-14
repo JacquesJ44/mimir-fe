@@ -13,9 +13,6 @@ export const AuthProvider = ({ children }) => {
     useEffect(() => {
         fetch(IP + '/navbar', {
             method: 'GET',
-            // headers: {'Authorization': 'Basic',
-            //           'Content-Type': 'application/json',
-            //           'Access-Control-Allow-Origin': 'true'},
             mode: 'cors',
             credentials: 'include'
         }).then((res) => {

@@ -2,8 +2,6 @@ import { useState, useEffect } from "react";
 import { Link, useParams } from 'react-router-dom';
 import { IP } from './config.js';
 import ViewHandover from "./ViewHandover.js";
-// import ViewHandover from "./ViewHandover.js";
-// import PdfViewerComponent from "./PDFViewerComponent.js";
 
 const ViewCircuit = () => {
 
@@ -74,8 +72,6 @@ const ViewCircuit = () => {
               <div className="px-4 py-3 bg-black-50 text-right sm:px-6 flex justify-between">
                 <Link to={"/circuits/updatecircuit/" + id}>
                   <button 
-                    // type="submit"
-                    // value="Delete"
                     className="mx-2 inline-flex items-center px-3 py-2 border border-transparent shadow-sm text-sm leading-4 font-medium rounded-md text-black bg-gray-200 hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400"
                     >
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -84,10 +80,9 @@ const ViewCircuit = () => {
                     Update
                   </button>
                 </Link>
+
                 <Link to="/circuits">
                   <button
-                    // type="submit"
-                    // value="Submit"
                     className="mx-2 inline-flex items-center px-3 py-2 border border-transparent shadow-sm text-sm leading-4 font-medium rounded-md text-black bg-gray-200 hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400"
                     >
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
